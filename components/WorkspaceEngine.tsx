@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Route, Calculator, ShieldCheck, Check, Filter, SlidersHorizontal, MapPin } from 'lucide-react';
+import { Route, Calculator, ShieldCheck, Check, Filter, SlidersHorizontal, MapPin, Building, Landmark } from 'lucide-react';
 import { Property, MilestoneLens, TechCampus } from '@/lib/types';
 import { PropertyCard } from './PropertyCard';
+import { CustomSelect, SelectOption } from './ui/CustomSelect';
 
 interface WorkspaceEngineProps {
   properties: Property[];
@@ -11,6 +12,19 @@ interface WorkspaceEngineProps {
   initialMicroMarket?: string;
   initialBudget?: string;
 }
+
+const CAMPUS_OPTIONS: SelectOption[] = [
+  { value: 'all', label: 'Show All Corridors', badge: 'All' },
+  { value: 'wipro', label: 'Wipro Corporate HQ', badge: 'Sarjapur Rd', description: 'Immediate connectivity to Carmelaram & Sarjapur clusters' },
+  { value: 'ecospace', label: 'Prestige Tech Park / Ecospace', badge: 'Bellandur-ORR', description: 'Prime Outer Ring Road corporate tech corridor' },
+  { value: 'manyata', label: 'Manyata Business Park', badge: 'Hebbal', description: 'North Bengaluru major employment hub' },
+];
+
+const TENURE_OPTIONS: SelectOption[] = [
+  { value: '15', label: '15 Years (8.40% Prime Rate)', badge: 'Lowest Interest', description: 'Accelerated equity buildup' },
+  { value: '20', label: '20 Years (8.45% Benchmark Rate)', badge: 'Standard', description: 'Optimal monthly liquidity balance' },
+  { value: '25', label: '25 Years (8.55% Extended Rate)', badge: 'Lowest EMI', description: 'Extended tenure amortization' },
+];
 
 export const WorkspaceEngine: React.FC<WorkspaceEngineProps> = ({
   properties,
@@ -157,26 +171,19 @@ export const WorkspaceEngine: React.FC<WorkspaceEngineProps> = ({
                 </div>
 
                 <div className="space-y-4">
-                  <div>
-                    <label className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
-                      Corporate Campus Hub
-                    </label>
-                    <select
-                      value={selectedCampus}
-                      onChange={(e) => setSelectedCampus(e.target.value as TechCampus)}
-                      className="field-input py-2.5 px-3 text-xs"
-                    >
-                      <option value="all">Show All Corridors</option>
-                      <option value="wipro">Wipro Corporate HQ (Sarjapur Road)</option>
-                      <option value="ecospace">Prestige Tech Park / Ecospace (ORR)</option>
-                      <option value="manyata">Manyata Business Park (Hebbal)</option>
-                    </select>
-                  </div>
+                  {/* Upgraded CustomSelect for Campus */}
+                  <CustomSelect
+                    label="Corporate Campus Hub"
+                    value={selectedCampus}
+                    onChange={(val) => setSelectedCampus(val as TechCampus)}
+                    options={CAMPUS_OPTIONS}
+                    icon={<Building className="w-3.5 h-3.5 text-brand-400" />}
+                  />
 
                   <div>
                     <div className="flex justify-between text-xs font-bold mb-2">
-                      <span className="text-slate-400">Max Drive Time</span>
-                      <span className="text-brand-400 font-mono">&lt; {maxDriveTime} min</span>
+                      <span className="text-slate-400">Max Peak Drive Time</span>
+                      <span className="text-brand-400 font-mono font-bold">&lt; {maxDriveTime} min</span>
                     </div>
                     <input
                       type="range"
@@ -211,8 +218,8 @@ export const WorkspaceEngine: React.FC<WorkspaceEngineProps> = ({
                 <div className="space-y-4 text-xs">
                   <div>
                     <div className="flex justify-between font-bold mb-2">
-                      <span className="text-slate-400">Target Property Value</span>
-                      <span className="text-brand-400 font-mono">{financialResults.priceCrDisplay}</span>
+                      <span className="text-slate-400 font-mono uppercase text-[10px]">Target Property Value</span>
+                      <span className="text-brand-400 font-mono text-sm font-black">{financialResults.priceCrDisplay}</span>
                     </div>
                     <input
                       type="range"
@@ -227,7 +234,7 @@ export const WorkspaceEngine: React.FC<WorkspaceEngineProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-slate-400 font-bold uppercase tracking-wider text-[11px] mb-2">
+                    <label className="block text-slate-400 font-mono font-semibold uppercase tracking-wider text-[10px] mb-2">
                       Down Payment Allocation
                     </label>
                     <div className="grid grid-cols-3 gap-1.5 text-center">
@@ -237,7 +244,7 @@ export const WorkspaceEngine: React.FC<WorkspaceEngineProps> = ({
                           onClick={() => setDownPaymentPct(dp)}
                           className={`py-2 rounded-[4px] font-bold transition-colors text-xs ${
                             downPaymentPct === dp
-                              ? 'bg-brand-500 text-[#030712]'
+                              ? 'bg-brand-500 text-[#030712] shadow'
                               : 'bg-[#040810] text-slate-300 border border-white/[0.06] hover:border-white/[0.12] hover:text-white'
                           }`}
                         >
@@ -247,22 +254,16 @@ export const WorkspaceEngine: React.FC<WorkspaceEngineProps> = ({
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-slate-400 font-bold uppercase tracking-wider text-[11px] mb-1.5">
-                      Loan Tenure &amp; Bank Rate
-                    </label>
-                    <select
-                      value={tenureYears}
-                      onChange={(e) => setTenureYears(Number(e.target.value))}
-                      className="field-input py-2.5 px-3 text-xs"
-                    >
-                      <option value={15}>15 Years (8.40% Prime Rate)</option>
-                      <option value={20}>20 Years (8.45% Benchmark Rate)</option>
-                      <option value={25}>25 Years (8.55% Extended Rate)</option>
-                    </select>
-                  </div>
+                  {/* Upgraded CustomSelect for Loan Tenure */}
+                  <CustomSelect
+                    label="Loan Tenure & Bank Rate"
+                    value={String(tenureYears)}
+                    onChange={(val) => setTenureYears(Number(val))}
+                    options={TENURE_OPTIONS}
+                    icon={<Landmark className="w-3.5 h-3.5 text-brand-400" />}
+                  />
 
-                  <div className="rounded-[6px] overflow-hidden border border-white/[0.06] bg-white/[0.06] grid grid-cols-2 gap-px">
+                  <div className="rounded-[6px] overflow-hidden border border-white/[0.06] bg-white/[0.06] grid grid-cols-2 gap-px pt-1">
                     {[
                       { label: 'Est. Monthly EMI',    value: financialResults.emiDisplay,           accent: false },
                       { label: 'Stamp Duty (5.6%)',   value: financialResults.stampDutyDisplay,     accent: false },

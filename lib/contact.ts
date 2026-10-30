@@ -51,3 +51,4 @@ export function getEmailUrl(property?: { name: string; microMarket?: string; pri
 export function getTelUrl(): string {
   return `tel:${ADVISOR_PHONE}`;
 }
+

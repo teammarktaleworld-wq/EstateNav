@@ -1,10 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, ShieldCheck, CheckCircle2, Lock, ArrowRight, Building2, MessageCircle, Phone, Mail } from 'lucide-react';
+import { X, ShieldCheck, CheckCircle2, Lock, ArrowRight, Building2, MessageCircle, Phone, Mail, User, Calendar, AlertCircle } from 'lucide-react';
 import { Property, LeadPayload } from '@/lib/types';
 import { submitLead } from '@/lib/firebase';
 import { ADVISOR_NAME, ADVISOR_PHONE_DISPLAY, getWhatsAppUrl, getEmailUrl, getTelUrl } from '@/lib/contact';
+import { CustomSelect, SelectOption } from './ui/CustomSelect';
 
 interface LeadModalProps {
   isOpen: boolean;
@@ -12,6 +13,13 @@ interface LeadModalProps {
   selectedProperty?: Property | null;
   actionTitle?: string;
 }
+
+const TIMELINE_OPTIONS: SelectOption[] = [
+  { value: 'Ready to Move / Within 3 Months', label: 'Ready to Move / Within 3 Months', badge: 'Immediate', description: 'OC received or near handover' },
+  { value: 'December 2026 (Under Construction)', label: 'December 2026', badge: 'Mid 2026', description: 'Mivan superstructure stage' },
+  { value: 'September 2028 (Mid-Term)', label: 'September 2028', badge: 'Growth', description: 'Optimal capital appreciation window' },
+  { value: '2030 (Pre-Launch Capital Appreciation)', label: '2030 (Pre-Launch)', badge: 'Pre-Launch', description: 'Ground floor allocation entry' },
+];
 
 export const LeadModal: React.FC<LeadModalProps> = ({
   isOpen,
@@ -25,18 +33,23 @@ export const LeadModal: React.FC<LeadModalProps> = ({
   const [timeline, setTimeline] = useState('Immediate / Ready');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   if (!isOpen) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !phone) return;
-
+    if (!name.trim() || !phone.trim()) {
+      setErrorMessage('Please fill in your name and mobile number.');
+      return;
+    }
+    setErrorMessage('');
     setIsSubmitting(true);
+
     const payload: LeadPayload = {
-      name,
-      email,
-      phone,
+      name: name.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
       preferredCorridor: selectedProperty?.microMarket || 'Sarjapur - Whitefield',
       budget: selectedProperty?.priceDisplay || '₹1.25 Cr - ₹2.5 Cr',
       propertyId: selectedProperty?.id,
@@ -55,6 +68,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
     setName('');
     setEmail('');
     setPhone('');
+    setErrorMessage('');
     setSubmitted(false);
     onClose();
   };
@@ -65,202 +79,239 @@ export const LeadModal: React.FC<LeadModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-150"
       onClick={handleReset}
     >
       <div
-        className="relative w-full max-w-lg bg-[#080d16] border border-white/[0.14] rounded-[8px] p-5 sm:p-7 shadow-2xl overflow-hidden max-h-[92vh] overflow-y-auto"
+        className="relative w-full max-w-lg bg-[#080d16] border border-white/[0.14] rounded-[8px] p-5 sm:p-7 shadow-2xl overflow-hidden max-h-[94vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
 
-        {/* Close */}
+        {/* Close Button */}
         <button
           onClick={handleReset}
-          className="btn-ghost absolute top-3.5 right-3.5 p-1.5"
+          className="btn-ghost absolute top-3.5 right-3.5 p-1.5 text-slate-400 hover:text-white"
           aria-label="Close"
         >
           <X className="w-4 h-4" />
         </button>
 
         {submitted ? (
-          /* ── Success State ── */
+          /* ── SUCCESS STATE ── */
           <div className="text-center py-5 space-y-4">
-            <div className="w-12 h-12 bg-brand-500/10 border border-brand-500/25 rounded-[6px] flex items-center justify-center mx-auto text-brand-400">
-              <CheckCircle2 className="w-6 h-6" />
+            <div className="w-14 h-14 bg-brand-500/10 border border-brand-500/30 rounded-[8px] flex items-center justify-center mx-auto text-brand-400 shadow-inner">
+              <CheckCircle2 className="w-7 h-7 stroke-[2.2]" />
             </div>
 
             <div>
-              <h3 className="text-lg sm:text-xl font-black text-white tracking-tight">
+              <h3 className="text-xl font-black text-white tracking-tight">
                 Official Allocation Access Granted
               </h3>
-              <p className="text-xs text-slate-300 max-w-sm mx-auto leading-relaxed mt-1.5">
+              <p className="text-xs sm:text-sm text-slate-300 max-w-sm mx-auto leading-relaxed mt-2">
                 Your dossier for{' '}
-                <strong className="text-white">{selectedProperty?.name || 'Abhee Projects'}</strong>{' '}
-                has been registered. Institutional advisor {ADVISOR_NAME} will transmit the
-                direct pricing sheet to <strong className="text-brand-300">{phone}</strong>.
+                <strong className="text-white font-bold">{selectedProperty?.name || 'Abhee Projects'}</strong>{' '}
+                has been registered. Institutional advisor <strong>{ADVISOR_NAME}</strong> will transmit the
+                direct developer pricing sheet to <strong className="text-brand-300 font-mono">{phone}</strong>.
               </p>
             </div>
 
-            {/* Quick 1-tap WhatsApp button right on success */}
-            <a
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-[#25D366] text-[#030712] font-black text-xs py-2.5 px-4 rounded-[6px] shadow transition-transform active:scale-[0.98]"
-            >
-              <MessageCircle className="w-4 h-4" />
-              <span>Connect on WhatsApp Now</span>
-            </a>
+            {/* Instant WhatsApp Action */}
+            <div className="pt-2">
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#22bf5b] text-[#030712] font-black text-xs py-3 px-5 rounded-[6px] shadow-lg transition-transform active:scale-[0.98]"
+              >
+                <MessageCircle className="w-4 h-4 fill-current" />
+                <span>Open Instant WhatsApp Dossier</span>
+              </a>
+            </div>
 
-            <div className="bg-[#040810] rounded-[6px] border border-white/[0.07] p-3 text-left text-xs text-slate-300 space-y-1">
+            {/* Regulatory Accreditation Note */}
+            <div className="bg-[#040810] rounded-[6px] border border-white/[0.07] p-3.5 text-left text-xs text-slate-300 space-y-1">
               <div className="flex items-center gap-1.5 text-brand-400 font-semibold text-[11px]">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 <span>Authorized Channel Partner Desk</span>
               </div>
               <p className="text-[10px] text-slate-400 font-mono">
-                K-RERA Reg: PRM/KA/RERA/1251/310/AG/260916/007810 • Direct Developer Terms.
+                K-RERA Reg: PRM/KA/RERA/1251/310/AG/260916/007810 • Direct Developer Terms. Zero brokerage guaranteed.
               </p>
             </div>
 
             <button onClick={handleReset} className="btn-secondary w-full py-2.5 text-xs">
-              Done — Return to Explorer
+              Return to Live Explorer
             </button>
           </div>
         ) : (
-          /* ── Form State ── */
+          /* ── FORM STATE ── */
           <div className="space-y-4">
 
-            {/* Header */}
+            {/* Modal Header */}
             <div>
-              <div className="inline-flex items-center gap-1.5 bg-brand-500/10 border border-brand-500/20 px-2 py-0.5 rounded-[4px] text-[10px] font-mono font-bold text-brand-400 uppercase tracking-wider mb-2">
+              <div className="inline-flex items-center gap-1.5 bg-brand-500/10 border border-brand-500/25 px-2.5 py-1 rounded-[4px] text-[10px] font-mono font-bold text-brand-400 uppercase tracking-wider mb-2">
                 <Lock className="w-3 h-3" />
-                Zero-Spam Privacy Shield
+                100% Encrypted &amp; Zero-Spam Shield
               </div>
 
-              <h3 className="text-base sm:text-lg font-black text-white tracking-tight">
+              <h3 className="text-lg sm:text-xl font-black text-white tracking-tight">
                 {actionTitle}
               </h3>
 
               {selectedProperty ? (
                 <div className="flex items-center gap-1.5 text-xs text-slate-300 mt-1">
-                  <Building2 className="w-3.5 h-3.5 text-brand-400" />
-                  <span>{selectedProperty.name} · {selectedProperty.priceDisplay}</span>
+                  <Building2 className="w-3.5 h-3.5 text-brand-400 shrink-0" />
+                  <span className="font-semibold text-white">{selectedProperty.name}</span>
+                  <span className="text-slate-500">·</span>
+                  <span className="text-brand-300 font-mono font-bold">{selectedProperty.priceDisplay}</span>
                 </div>
               ) : (
-                <p className="text-xs text-slate-400 mt-0.5">
-                  Direct developer allocations with institutional research &amp; title clearance.
+                <p className="text-xs text-slate-400 mt-1">
+                  Verified developer allocations with institutional research &amp; title clearances.
                 </p>
               )}
             </div>
 
-            {/* Instant Contact Short-circuit Bar */}
-            <div className="bg-[#040810] rounded-[6px] border border-white/[0.07] p-2.5 space-y-2">
+            {/* Instant Direct Connect Bar */}
+            <div className="bg-[#040810] rounded-[6px] border border-white/[0.08] p-3 space-y-2">
               <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
-                <span>INSTANT ADVISOR CONNECT</span>
-                <span className="text-brand-400">{ADVISOR_NAME}</span>
+                <span>PREFER DIRECT ADVISOR CONNECT?</span>
+                <span className="text-brand-400 font-bold">{ADVISOR_NAME}</span>
               </div>
               <div className="grid grid-cols-3 gap-1.5">
                 <a
                   href={whatsappLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-1 bg-[#25D366]/15 hover:bg-[#25D366]/25 text-[#25D366] border border-[#25D366]/30 py-1.5 px-2 rounded-[4px] text-[11px] font-bold"
+                  className="flex items-center justify-center gap-1.5 bg-[#25D366]/15 hover:bg-[#25D366]/25 text-[#25D366] border border-[#25D366]/30 py-2 px-2 rounded-[4px] text-[11px] font-bold transition-colors"
                 >
-                  <MessageCircle className="w-3 h-3" />
+                  <MessageCircle className="w-3.5 h-3.5" />
                   <span>WhatsApp</span>
                 </a>
                 <a
                   href={telLink}
-                  className="flex items-center justify-center gap-1 bg-white/[0.04] hover:bg-white/[0.08] text-slate-200 border border-white/[0.1] py-1.5 px-2 rounded-[4px] text-[11px] font-medium"
+                  className="flex items-center justify-center gap-1.5 bg-white/[0.04] hover:bg-white/[0.08] text-slate-200 border border-white/[0.1] py-2 px-2 rounded-[4px] text-[11px] font-medium transition-colors"
                 >
-                  <Phone className="w-3 h-3 text-brand-400" />
-                  <span>Call</span>
+                  <Phone className="w-3.5 h-3.5 text-brand-400" />
+                  <span>Direct Call</span>
                 </a>
                 <a
                   href={emailLink}
-                  className="flex items-center justify-center gap-1 bg-white/[0.04] hover:bg-white/[0.08] text-slate-200 border border-white/[0.1] py-1.5 px-2 rounded-[4px] text-[11px] font-medium"
+                  className="flex items-center justify-center gap-1.5 bg-white/[0.04] hover:bg-white/[0.08] text-slate-200 border border-white/[0.1] py-2 px-2 rounded-[4px] text-[11px] font-medium transition-colors"
                 >
-                  <Mail className="w-3 h-3 text-brand-400" />
+                  <Mail className="w-3.5 h-3.5 text-brand-400" />
                   <span>Email</span>
                 </a>
               </div>
             </div>
 
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-3">
-
-              <div>
-                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="e.g. Karthik Ramamurthy"
-                  className="field-input py-2 px-3 text-xs"
-                />
+            {/* Error Banner */}
+            {errorMessage && (
+              <div className="flex items-center gap-2 p-2.5 rounded-[4px] bg-red-500/10 border border-red-500/30 text-red-400 text-xs">
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                <span>{errorMessage}</span>
               </div>
+            )}
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-                    WhatsApp / Mobile *
+            {/* Precision Form */}
+            <form onSubmit={handleSubmit} className="space-y-3.5">
+
+              {/* Name Field */}
+              <div>
+                <div className="flex justify-between items-center mb-1">
+                  <label className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
+                    Full Name
                   </label>
+                  <span className="text-[9px] font-mono text-brand-400 uppercase">Required</span>
+                </div>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                    <User className="w-3.5 h-3.5" />
+                  </div>
                   <input
-                    type="tel"
+                    type="text"
                     required
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    placeholder="+91 98800 XXXXX"
-                    className="field-input py-2 px-3 text-xs"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="e.g. Karthik Ramamurthy, VP Engineering"
+                    className="field-input pl-9 pr-3 py-2.5 text-xs font-medium"
                   />
                 </div>
+              </div>
 
+              {/* Phone & Email Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {/* Phone */}
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-                    Work Email (Optional)
-                  </label>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="karthik@company.com"
-                    className="field-input py-2 px-3 text-xs"
-                  />
+                  <div className="flex justify-between items-center mb-1">
+                    <label className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
+                      WhatsApp / Mobile
+                    </label>
+                    <span className="text-[9px] font-mono text-brand-400 uppercase">Required</span>
+                  </div>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                      <Phone className="w-3.5 h-3.5" />
+                    </div>
+                    <input
+                      type="tel"
+                      required
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      placeholder="+91 98800 XXXXX"
+                      className="field-input pl-9 pr-3 py-2.5 text-xs font-medium font-mono"
+                    />
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div>
+                  <div className="flex justify-between items-center mb-1">
+                    <label className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
+                      Work Email
+                    </label>
+                    <span className="text-[9px] font-mono text-slate-500 uppercase">Optional</span>
+                  </div>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                      <Mail className="w-3.5 h-3.5" />
+                    </div>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="karthik@company.com"
+                      className="field-input pl-9 pr-3 py-2.5 text-xs font-medium"
+                    />
+                  </div>
                 </div>
               </div>
 
-              <div>
-                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-                  Target Possession Horizon
-                </label>
-                <select
-                  value={timeline}
-                  onChange={(e) => setTimeline(e.target.value)}
-                  className="field-input py-2 px-3 text-xs"
-                >
-                  <option>Ready to Move / Within 3 Months</option>
-                  <option>December 2026 (Under Construction)</option>
-                  <option>September 2028 (Mid-Term)</option>
-                  <option>2030 (Pre-Launch Capital Appreciation)</option>
-                </select>
+              {/* Custom Possession Horizon Dropdown */}
+              <CustomSelect
+                label="Target Possession Horizon"
+                value={timeline}
+                onChange={setTimeline}
+                options={TIMELINE_OPTIONS}
+                icon={<Calendar className="w-3.5 h-3.5 text-brand-400" />}
+              />
+
+              {/* Mandatory Disclosure */}
+              <div className="bg-[#040810] rounded-[6px] border border-white/[0.07] p-3 text-[10px] text-slate-400 leading-relaxed">
+                <span className="font-semibold text-slate-300">Mandatory Channel Partner Disclosure: </span>
+                By submitting this form, you consent to registering your inquiry through{' '}
+                <strong className="text-slate-200">{ADVISOR_NAME}</strong>, authorized Channel Partner for{' '}
+                <strong className="text-slate-200">Abhee Ventures</strong>. Official sales communications are coordinated directly under developer terms with zero brokerage.
               </div>
 
-              {/* Mandatory disclosure */}
-              <div className="bg-[#040810] rounded-[6px] border border-white/[0.07] p-2.5 text-[10px] text-slate-400 leading-relaxed">
-                <span className="font-semibold text-slate-300">Channel Partner Disclosure: </span>
-                Inquiry registered via <strong>{ADVISOR_NAME}</strong>, authorized Channel Partner for <strong>Abhee Ventures</strong>. Official developer terms, zero brokerage.
-              </div>
-
+              {/* Submit CTA */}
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn-primary w-full py-3 font-bold flex items-center justify-center gap-2 text-xs"
+                className="btn-primary w-full py-3.5 font-bold flex items-center justify-center gap-2 text-xs sm:text-sm shadow-xl"
               >
-                <span>{isSubmitting ? 'Verifying Allocation...' : 'Unlock Direct Developer Pricing'}</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <span>{isSubmitting ? 'Securing Allocation Access...' : 'Unlock Direct Developer Pricing'}</span>
+                <ArrowRight className="w-4 h-4 stroke-[2.5]" />
               </button>
 
             </form>

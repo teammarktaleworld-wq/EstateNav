@@ -1,8 +1,9 @@
 'use client';
 
 import React from 'react';
-import { Search, Shield, ArrowDown, CheckCircle2 } from 'lucide-react';
+import { Search, Shield, ArrowDown, CheckCircle2, MapPin, IndianRupee } from 'lucide-react';
 import { Segment } from '@/lib/types';
+import { CustomSelect, SelectOption } from './ui/CustomSelect';
 
 interface HeroFoldProps {
   segment: Segment;
@@ -43,21 +44,21 @@ export const HeroFold: React.FC<HeroFoldProps> = ({
       spotlightPrice: '₹1.35 Cr Onwards',
       spotlightImg: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=80',
       features: ['3-Acre Golf Zone', '4 Signature Clubhouses', 'Mivan Formwork'],
-      locationLabel: 'Micro-Market',
+      locationLabel: 'Micro-Market Corridor',
       locations: [
-        'All Bengaluru Corridors',
-        'Varthur - Sarjapur Road',
-        'Whitefield & EPIP Zone',
-        'Electronic City Phase 1',
-        'North BLR (Hebbal / STRR)',
-      ],
-      budgetLabel: 'Budget / Ticket',
+        { value: 'All Bengaluru Corridors', label: 'All Bengaluru Corridors', badge: 'All' },
+        { value: 'Varthur - Sarjapur Road', label: 'Varthur - Sarjapur Road', badge: 'Tech Corridor', description: 'Adjacent to Wipro HQ & ORR link' },
+        { value: 'Whitefield & EPIP Zone', label: 'Whitefield & EPIP Zone', badge: 'IT Hub', description: 'Purple Line Metro connected' },
+        { value: 'Electronic City Phase 1', label: 'Electronic City Phase 1', badge: 'Elevated Toll', description: 'Direct Silk Board access' },
+        { value: 'North BLR (Hebbal / STRR)', label: 'North BLR (Hebbal / STRR)', badge: 'Airport Belt', description: 'High appreciation corridor' },
+      ] as SelectOption[],
+      budgetLabel: 'Ticket Size / Budget',
       budgets: [
-        'Any Budget',
-        '₹70 L – ₹1.25 Cr (First Home)',
-        '₹1.25 Cr – ₹2.0 Cr (Mid-Premium)',
-        '₹2.0 Cr+ (Luxury 3.5 & 4.5 BHK)',
-      ],
+        { value: 'Any Budget', label: 'Any Budget Range', badge: 'All' },
+        { value: '₹70 L – ₹1.25 Cr (First Home)', label: '₹70 L – ₹1.25 Cr', badge: 'First Home', description: '2 BHK Compact & Standard' },
+        { value: '₹1.25 Cr – ₹2.0 Cr (Mid-Premium)', label: '₹1.25 Cr – ₹2.0 Cr', badge: 'Mid-Premium', description: '3 BHK Premium Masterplans' },
+        { value: '₹2.0 Cr+ (Luxury 3.5 & 4.5 BHK)', label: '₹2.0 Cr+ (Luxury)', badge: 'Flagship', description: '3.5 & 4.5 BHK Scotland Enclaves' },
+      ] as SelectOption[],
     },
     commercial: {
       badge: 'INSTITUTIONAL TECH PARK PORTFOLIO',
@@ -80,18 +81,18 @@ export const HeroFold: React.FC<HeroFoldProps> = ({
       features: ['8.9% Institutional Cap Rate', 'Platinum Green Building', 'Redundant Power'],
       locationLabel: 'Tech Corridor',
       locations: [
-        'All Bengaluru Corridors',
-        'Outer Ring Road (Bellandur-ORR)',
-        'Whitefield & EPIP Zone',
-        'North BLR (Hebbal / STRR)',
-      ],
-      budgetLabel: 'Carpet / Floorplate',
+        { value: 'All Bengaluru Corridors', label: 'All Bengaluru Corridors', badge: 'All' },
+        { value: 'Outer Ring Road (Bellandur-ORR)', label: 'Outer Ring Road (ORR)', badge: 'Tier-1 SEZ' },
+        { value: 'Whitefield & EPIP Zone', label: 'Whitefield & EPIP Zone', badge: 'IT Zone' },
+        { value: 'North BLR (Hebbal / STRR)', label: 'North BLR (Hebbal)', badge: 'Expressway' },
+      ] as SelectOption[],
+      budgetLabel: 'Floorplate Size',
       budgets: [
-        'Any Size',
-        '10,000 - 25,000 sq.ft.',
-        '25,000 - 50,000 sq.ft.',
-        '50,000+ sq.ft. (Campus Block)',
-      ],
+        { value: 'Any Size', label: 'Any Size Range', badge: 'All' },
+        { value: '10,000 - 25,000 sq.ft.', label: '10,000 – 25,000 sq.ft.', badge: 'Mid Suite' },
+        { value: '25,000 - 50,000 sq.ft.', label: '25,000 – 50,000 sq.ft.', badge: 'Full Floor' },
+        { value: '50,000+ sq.ft. (Campus Block)', label: '50,000+ sq.ft.', badge: 'Campus Block' },
+      ] as SelectOption[],
     },
     plotted: {
       badge: 'INFRASTRUCTURE CORRIDORS & LAND RESERVES',
@@ -112,20 +113,20 @@ export const HeroFold: React.FC<HeroFoldProps> = ({
       spotlightPrice: '₹90 Lakhs Onwards',
       spotlightImg: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1400&q=80',
       features: ['BMRDA Approved', 'Underground Utilities', 'Clubhouse & Parks'],
-      locationLabel: 'Plotted Belt',
+      locationLabel: 'Plotted Corridor',
       locations: [
-        'All Bengaluru Corridors',
-        'Varthur - Sarjapur Road',
-        'Whitefield & EPIP Zone',
-        'Electronic City Phase 1',
-      ],
+        { value: 'All Bengaluru Corridors', label: 'All Bengaluru Corridors', badge: 'All' },
+        { value: 'Varthur - Sarjapur Road', label: 'Varthur - Sarjapur Road', badge: 'STRR Hub' },
+        { value: 'Whitefield & EPIP Zone', label: 'Whitefield Extension', badge: 'Gated' },
+        { value: 'Electronic City Phase 1', label: 'Electronic City Belt', badge: 'Freehold' },
+      ] as SelectOption[],
       budgetLabel: 'Plot Dimension',
       budgets: [
-        'Any Dimension',
-        '1,200 sq.ft. (30x40)',
-        '1,500 sq.ft. (30x50)',
-        '1,800+ sq.ft. (Villa Plot)',
-      ],
+        { value: 'Any Dimension', label: 'Any Dimension', badge: 'All' },
+        { value: '1,200 sq.ft. (30x40)', label: '1,200 sq.ft. (30×40)', badge: 'Standard' },
+        { value: '1,500 sq.ft. (30x50)', label: '1,500 sq.ft. (30×50)', badge: 'Premium' },
+        { value: '1,800+ sq.ft. (Villa Plot)', label: '1,800+ sq.ft. (Villa Plot)', badge: 'Large' },
+      ] as SelectOption[],
     },
   }[segment];
 
@@ -153,52 +154,34 @@ export const HeroFold: React.FC<HeroFoldProps> = ({
               {segmentConfig.description}
             </p>
 
-            {/* Architectural Search Console */}
-            <div className="bg-[#080d16] p-4 sm:p-6 rounded-[8px] border border-white/[0.1] shadow-2xl space-y-3 sm:space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {/* Architectural Search Console with Enhanced Custom Selects */}
+            <div className="bg-[#080d16] p-4 sm:p-6 rounded-[8px] border border-white/[0.1] shadow-2xl space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 
-                {/* Micro-market selector */}
-                <div>
-                  <label className="block text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider mb-1">
-                    {segmentConfig.locationLabel}
-                  </label>
-                  <select
-                    value={selectedMicroMarket}
-                    onChange={(e) => onMicroMarketChange(e.target.value)}
-                    className="field-input py-2 px-3 text-xs font-medium"
-                  >
-                    {segmentConfig.locations.map((loc) => (
-                      <option key={loc} value={loc} className="bg-slate-900 text-white">
-                        {loc}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                {/* Custom Micro-market Select */}
+                <CustomSelect
+                  label={segmentConfig.locationLabel}
+                  value={selectedMicroMarket}
+                  onChange={onMicroMarketChange}
+                  options={segmentConfig.locations}
+                  icon={<MapPin className="w-3.5 h-3.5 text-brand-400" />}
+                />
 
-                {/* Budget selector */}
-                <div>
-                  <label className="block text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider mb-1">
-                    {segmentConfig.budgetLabel}
-                  </label>
-                  <select
-                    value={selectedBudget}
-                    onChange={(e) => onBudgetChange(e.target.value)}
-                    className="field-input py-2 px-3 text-xs font-medium"
-                  >
-                    {segmentConfig.budgets.map((b) => (
-                      <option key={b} value={b} className="bg-slate-900 text-white">
-                        {b}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                {/* Custom Budget Select */}
+                <CustomSelect
+                  label={segmentConfig.budgetLabel}
+                  value={selectedBudget}
+                  onChange={onBudgetChange}
+                  options={segmentConfig.budgets}
+                  icon={<IndianRupee className="w-3.5 h-3.5 text-brand-400" />}
+                />
 
               </div>
 
               {/* Search CTA */}
               <button
                 onClick={onSearchClick}
-                className="btn-primary w-full py-3 space-x-2 text-xs sm:text-sm uppercase tracking-wider font-extrabold flex items-center justify-center"
+                className="btn-primary w-full py-3.5 space-x-2 text-xs sm:text-sm uppercase tracking-wider font-extrabold flex items-center justify-center"
               >
                 <Search className="w-4 h-4 text-canvas-950 stroke-[2.5]" />
                 <span>Search Verified Properties Below</span>
@@ -207,7 +190,7 @@ export const HeroFold: React.FC<HeroFoldProps> = ({
 
           </div>
 
-          {/* Right Spotlight Hero Card - Desktop Only (Hidden on mobile to let users see the property listing immediately!) */}
+          {/* Right Spotlight Hero Card - Desktop Only */}
           <div className="hidden lg:block lg:col-span-7">
             <div className="relative rounded-[8px] overflow-hidden border border-white/[0.12] shadow-2xl group bg-[#070b13]">
               
