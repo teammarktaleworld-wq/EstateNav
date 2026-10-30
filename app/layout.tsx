@@ -78,7 +78,7 @@ export default function RootLayout({
     ],
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+91-80-0000-0000',
+      telephone: '+91 97406 09562',
       contactType: 'Sales & Advisory Support',
       areaServed: 'IN',
       availableLanguage: ['English', 'Kannada', 'Hindi'],

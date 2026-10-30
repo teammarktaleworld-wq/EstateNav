@@ -4,15 +4,19 @@ export const ADVISOR_NAME = 'SV Praveen';
 export const ADVISOR_TITLE = 'Authorized Institutional Channel Partner';
 export const ADVISOR_RERA = 'PRM/KA/RERA/1251/310/AG/260916/007810';
 
-export const ADVISOR_PHONE = '+919880000000';
-export const ADVISOR_PHONE_DISPLAY = '+91 98800 00000';
-export const ADVISOR_EMAIL = 'advisory@estatenav.in';
+// Contact numbers configurable via Environment Variables with default fallback to +91 97406 09562
+export const ADVISOR_PHONE = process.env.NEXT_PUBLIC_ADVISOR_PHONE || '+919740609562';
+export const ADVISOR_PHONE_DISPLAY = process.env.NEXT_PUBLIC_ADVISOR_PHONE_DISPLAY || '+91 97406 09562';
+export const ADVISOR_WHATSAPP = process.env.NEXT_PUBLIC_ADVISOR_WHATSAPP || '919740609562';
+export const ADVISOR_EMAIL = process.env.NEXT_PUBLIC_ADVISOR_EMAIL || 'advisory@estatenav.in';
 
 /**
  * Generate a pre-filled direct WhatsApp link for a specific property or general inquiry
  */
 export function getWhatsAppUrl(property?: { name: string; microMarket?: string; priceDisplay?: string } | null): string {
-  const base = 'https://wa.me/919880000000';
+  const cleanNumber = ADVISOR_WHATSAPP.replace(/[^0-9]/g, '');
+  const base = `https://wa.me/${cleanNumber}`;
+
   if (!property) {
     const text = encodeURIComponent(
       `Hi ${ADVISOR_NAME}, I am browsing EstateNav and would like to speak with an institutional advisor regarding verified allocations in Bengaluru.`
@@ -49,6 +53,6 @@ export function getEmailUrl(property?: { name: string; microMarket?: string; pri
  * Generate direct tel link
  */
 export function getTelUrl(): string {
-  return `tel:${ADVISOR_PHONE}`;
+  const cleanTel = ADVISOR_PHONE.replace(/[^0-9+]/g, '');
+  return `tel:${cleanTel}`;
 }
-

@@ -112,7 +112,9 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           {/* Direct Advisor Info Banner */}
           <div className="bg-[#050912] rounded-[4px] border border-white/[0.05] p-2 flex items-center justify-between text-[11px] text-slate-400">
             <div className="flex items-center gap-1.5">
-              <img src="/logo.png" alt="EstateNav" className="w-3.5 h-3.5 object-contain shrink-0" />
+              <div className="w-4 h-4 rounded-full overflow-hidden shrink-0 flex items-center justify-center bg-[#070b13]">
+                <img src="/logo.png" alt="EstateNav" className="w-full h-full object-cover scale-[1.04]" />
+              </div>
               <span>Advisor: <strong className="text-slate-200">{ADVISOR_NAME}</strong></span>
             </div>
             <span className="text-[10px] font-mono text-brand-400 font-semibold">Direct Partner</span>

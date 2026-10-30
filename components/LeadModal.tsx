@@ -53,7 +53,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
       preferredCorridor: selectedProperty?.microMarket || 'Sarjapur - Whitefield',
       budget: selectedProperty?.priceDisplay || '₹1.25 Cr - ₹2.5 Cr',
       propertyId: selectedProperty?.id,
-      propertyName: selectedProperty?.name || 'Abhee Partner Portfolio',
+      propertyName: selectedProperty?.name || 'Verified Partner Portfolio',
       actionContext: actionTitle,
       channelPartnerDisclosureAccepted: true,
       createdAt: new Date().toISOString(),
@@ -99,11 +99,11 @@ export const LeadModal: React.FC<LeadModalProps> = ({
         {submitted ? (
           /* ── SUCCESS STATE ── */
           <div className="text-center py-5 space-y-4">
-            <div className="relative w-16 h-16 bg-[#040810] border border-brand-500/30 rounded-[8px] p-2 flex items-center justify-center mx-auto shadow-xl">
+            <div className="relative w-16 h-16 bg-[#040810] border border-brand-500/30 rounded-[8px] overflow-hidden flex items-center justify-center mx-auto shadow-xl">
               <img
                 src="/logo.png"
                 alt="EstateNav Official Logo"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover scale-[1.04]"
               />
               <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-brand-500 flex items-center justify-center text-[#030712] shadow">
                 <CheckCircle2 className="w-3.5 h-3.5 stroke-[2.5]" />
@@ -116,7 +116,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 max-w-sm mx-auto leading-relaxed mt-2">
                 Your dossier for{' '}
-                <strong className="text-white font-bold">{selectedProperty?.name || 'Abhee Projects'}</strong>{' '}
+                <strong className="text-white font-bold">{selectedProperty?.name || 'Verified Primary Projects'}</strong>{' '}
                 has been registered. Institutional advisor <strong>{ADVISOR_NAME}</strong> will transmit the
                 direct developer pricing sheet to <strong className="text-brand-300 font-mono">{phone}</strong>.
               </p>
@@ -157,8 +157,8 @@ export const LeadModal: React.FC<LeadModalProps> = ({
             {/* Modal Header */}
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-6 h-6 rounded-[4px] bg-[#040810] border border-white/[0.12] p-0.5 flex items-center justify-center shrink-0">
-                  <img src="/logo.png" alt="EstateNav" className="w-full h-full object-contain" />
+                <div className="w-7 h-7 rounded-[5px] bg-[#040810] border border-white/[0.12] overflow-hidden flex items-center justify-center shrink-0">
+                  <img src="/logo.png" alt="EstateNav" className="w-full h-full object-cover scale-[1.04]" />
                 </div>
                 <div className="inline-flex items-center gap-1.5 bg-brand-500/10 border border-brand-500/25 px-2 py-0.5 rounded-[4px] text-[10px] font-mono font-bold text-brand-400 uppercase tracking-wider">
                   <Lock className="w-3 h-3" />
@@ -270,7 +270,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                       required
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      placeholder="+91 98800 XXXXX"
+                      placeholder="+91 97406 XXXXX"
                       className="field-input pl-9 pr-3 py-2.5 text-xs font-medium font-mono"
                     />
                   </div>
@@ -312,8 +312,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
               <div className="bg-[#040810] rounded-[6px] border border-white/[0.07] p-3 text-[10px] text-slate-400 leading-relaxed">
                 <span className="font-semibold text-slate-300">Mandatory Channel Partner Disclosure: </span>
                 By submitting this form, you consent to registering your inquiry through{' '}
-                <strong className="text-slate-200">{ADVISOR_NAME}</strong>, authorized Channel Partner for{' '}
-                <strong className="text-slate-200">Abhee Ventures</strong>. Official sales communications are coordinated directly under developer terms with zero brokerage.
+                <strong className="text-slate-200">{ADVISOR_NAME}</strong>, authorized Channel Partner. Official sales communications are coordinated directly under developer terms with zero brokerage.
               </div>
 
               {/* Submit CTA */}

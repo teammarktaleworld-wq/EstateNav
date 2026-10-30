@@ -25,11 +25,11 @@ export const Header: React.FC<HeaderProps> = ({
           onClick={() => onSegmentChange('residential')}
           className="flex items-center space-x-3.5 cursor-pointer group select-none"
         >
-          <div className="relative w-11 h-11 sm:w-13 sm:h-13 rounded-[8px] bg-[#070b13] border border-white/[0.14] p-1.5 flex items-center justify-center shrink-0 group-hover:border-brand-500/50 transition-all shadow-md">
+          <div className="relative w-11 h-11 sm:w-13 sm:h-13 rounded-[8px] bg-[#070b13] border border-white/[0.14] overflow-hidden flex items-center justify-center shrink-0 group-hover:border-brand-500/50 transition-all shadow-md">
             <img
               src="/logo.png"
               alt="EstateNav Official Logo"
-              className="w-full h-full object-contain transform group-hover:scale-105 transition-transform"
+              className="w-full h-full object-cover transform scale-[1.04] group-hover:scale-110 transition-transform"
             />
           </div>
           <div>

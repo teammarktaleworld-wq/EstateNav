@@ -11,11 +11,11 @@ export const Footer: React.FC = () => {
         {/* 1. Header Brand Row with Enlarged Logo & Matching Logo Font */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-white/[0.08]">
           <div className="flex items-center gap-3.5">
-            <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-[8px] bg-[#070b13] border border-white/[0.14] p-1.5 flex items-center justify-center shrink-0 shadow-md">
+            <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-[8px] bg-[#070b13] border border-white/[0.14] overflow-hidden flex items-center justify-center shrink-0 shadow-md">
               <img
                 src="/logo.png"
                 alt="EstateNav Official Logo"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover transform scale-[1.04]"
               />
             </div>
             <div>
