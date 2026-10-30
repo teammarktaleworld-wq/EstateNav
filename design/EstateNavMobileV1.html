@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EstateNav — Mobile-First Real Estate Advisory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            500: '#16a34a',
+                            600: '#15803d',
+                            700: '#166534',
+                            dark: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-950 font-sans text-slate-100 antialiased min-h-screen pb-20 md:pb-0">
+
+    <!-- MOBILE STICKY HEADER -->
+    <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center text-white font-bold text-base">
+                <i class="fa-solid fa-compass text-emerald-300"></i>
+            </div>
+            <span class="text-xl font-extrabold tracking-tight text-white">Estate<span class="text-emerald-400">Nav</span></span>
+        </div>
+        <button onclick="openMobileTool('calc')" class="bg-slate-800 text-emerald-400 text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-700 flex items-center space-x-1">
+            <i class="fa-solid fa-calculator"></i>
+            <span>EMI / Duty</span>
+        </button>
+    </header>
+
+    <!-- FOLD 1: MOBILE HERO & ABHEE LAUNCH SPOTLIGHT -->
+    <section class="p-4 space-y-4 bg-slate-900 border-b border-slate-800">
+        
+        <!-- Badge -->
+        <div class="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded-full text-emerald-400 text-xs font-medium">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Q4 2026 Primary Sales Launch Pad</span>
+        </div>
+
+        <h1 class="text-2xl font-extrabold text-white leading-snug">
+            Navigate Bengaluru Real Estate with <span class="text-emerald-400">Data Certainty.</span>
+        </h1>
+
+        <!-- Mobile Project Anchor Card (Abhee Ventures) -->
+        <div class="relative rounded-xl overflow-hidden border border-slate-700 shadow-xl bg-slate-950">
+            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" class="w-full h-48 object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+            
+            <span class="absolute top-3 left-3 bg-emerald-600 text-white text-[9px] font-bold px-2 py-0.5 rounded uppercase">
+                Partner Launch Feature
+            </span>
+
+            <div class="absolute bottom-3 left-3 right-3 space-y-1">
+                <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">Abhee Ventures Anchor</span>
+                <h2 class="text-base font-bold text-white leading-tight">Abhee Codename New Dimension</h2>
+                <div class="flex justify-between items-center text-xs pt-1">
+                    <span class="text-slate-300">Varthur-Sarjapur Link</span>
+                    <span class="font-extrabold text-emerald-400">From ₹1.18 Cr*</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Filter Pills -->
+        <div class="flex space-x-2 overflow-x-auto no-scrollbar text-xs pt-1">
+            <button onclick="filterLens('all')" class="px-3.5 py-2 rounded-lg font-bold bg-emerald-500 text-slate-950 shrink-0">All Units (4)</button>
+            <button onclick="filterLens('first')" class="px-3.5 py-2 rounded-lg font-bold bg-slate-800 text-slate-300 shrink-0 border border-slate-700">First Home (< ₹1.25 Cr)</button>
+            <button onclick="filterLens('upgrade')" class="px-3.5 py-2 rounded-lg font-bold bg-slate-800 text-slate-300 shrink-0 border border-slate-700">Upgrading (3/4 BHK)</button>
+            <button onclick="filterLens('nri')" class="px-3.5 py-2 rounded-lg font-bold bg-slate-800 text-slate-300 shrink-0 border border-slate-700">NRI Yield</button>
+        </div>
+    </section>
+
+    <!-- FOLD 2: TELEMETRY TICKER (MOBILE HORIZONTAL SCROLL) -->
+    <section class="bg-slate-950 px-4 py-2.5 border-b border-slate-800 text-xs text-slate-400 overflow-x-auto no-scrollbar flex space-x-4 items-center shrink-0">
+        <span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded uppercase">Benchmark</span>
+        <span class="shrink-0 text-white font-mono">Sarjapur: <strong>₹8,420/sf</strong> (+8.2%)</span>
+        <span class="shrink-0 text-slate-600">|</span>
+        <span class="shrink-0 text-white font-mono">Whitefield: <strong>₹9,850/sf</strong> (+9.4%)</span>
+        <span class="shrink-0 text-slate-600">|</span>
+        <span class="shrink-0 text-white font-mono">Yield: <strong class="text-emerald-400">4.8%</strong></span>
+    </section>
+
+    <!-- FOLD 3: PROPERTY GRID FIRST (DESKTOP USES SPLIT VIEW, MOBILE USES CARDS FIRST) -->
+    <main class="p-4 space-y-4">
+        
+        <div class="flex justify-between items-center text-xs text-slate-400">
+            <span>Showing <strong id="m-count" class="text-white">4 Allocations</strong></span>
+            <button onclick="openMobileTool('commute')" class="text-emerald-400 font-bold flex items-center space-x-1">
+                <i class="fa-solid fa-route"></i>
+                <span>Commute Filter</span>
+            </button>
+        </div>
+
+        <div id="m-grid" class="space-y-4">
+            
+            <!-- Mobile Card 1 -->
+            <div class="m-card bg-slate-900 rounded-xl overflow-hidden border border-slate-800 space-y-3 p-3" data-lens="upgrade">
+                <div class="relative h-40 rounded-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
+                    <span class="absolute top-2 left-2 bg-slate-950/80 text-emerald-400 text-[9px] font-bold px-2 py-0.5 rounded">K-RERA APPROVED</span>
+                </div>
+                <div>
+                    <span class="text-[9px] text-emerald-400 font-bold uppercase">Abhee Ventures Partner</span>
+                    <h3 class="font-bold text-white text-sm">Abhee Codename New Dimension</h3>
+                    <p class="text-xs text-slate-400">Varthur-Sarjapur Link</p>
+                </div>
+                <div class="flex justify-between items-center text-xs pt-2 border-t border-slate-800">
+                    <span class="text-slate-300">2, 3 & 4 BHK Township</span>
+                    <span class="font-extrabold text-emerald-400">₹1.18 Cr – ₹2.45 Cr</span>
+                </div>
+                <button class="w-full bg-emerald-500 text-slate-950 font-extrabold py-2.5 rounded-lg text-xs">
+                    Inspect Allocation Deck
+                </button>
+            </div>
+
+            <!-- Mobile Card 2 -->
+            <div class="m-card bg-slate-900 rounded-xl overflow-hidden border border-slate-800 space-y-3 p-3" data-lens="first">
+                <div class="relative h-40 rounded-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
+                    <span class="absolute top-2 left-2 bg-slate-950/80 text-emerald-400 text-[9px] font-bold px-2 py-0.5 rounded">K-RERA APPROVED</span>
+                </div>
+                <div>
+                    <span class="text-[9px] text-emerald-400 font-bold uppercase">Abhee Ventures Partner</span>
+                    <h3 class="font-bold text-white text-sm">Abhee Celestial City</h3>
+                    <p class="text-xs text-slate-400">Sarjapur Main Road (Wipro SEZ)</p>
+                </div>
+                <div class="flex justify-between items-center text-xs pt-2 border-t border-slate-800">
+                    <span class="text-slate-300">2 & 3 BHK Township</span>
+                    <span class="font-extrabold text-emerald-400">₹1.12 Cr – ₹1.78 Cr</span>
+                </div>
+                <button class="w-full bg-emerald-500 text-slate-950 font-extrabold py-2.5 rounded-lg text-xs">
+                    Inspect Allocation Deck
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- NATIVE MOBILE BOTTOM NAVIGATION BAR -->
+    <nav class="fixed bottom-0 inset-x-0 z-50 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 flex justify-around py-2 text-[10px] text-slate-400">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="flex flex-col items-center space-y-0.5 text-emerald-400 font-bold">
+            <i class="fa-solid fa-house text-sm"></i>
+            <span>Explore</span>
+        </button>
+        <button onclick="openMobileTool('commute')" class="flex flex-col items-center space-y-0.5 hover:text-white">
+            <i class="fa-solid fa-route text-sm"></i>
+            <span>Commute</span>
+        </button>
+        <button onclick="openMobileTool('calc')" class="flex flex-col items-center space-y-0.5 hover:text-white">
+            <i class="fa-solid fa-calculator text-sm"></i>
+            <span>Calculator</span>
+        </button>
+        <button onclick="alert('Opening WhatsApp VIP Concierge...')" class="flex flex-col items-center space-y-0.5 hover:text-white">
+            <i class="fa-brands fa-whatsapp text-sm text-emerald-400"></i>
+            <span>Concierge</span>
+        </button>
+    </nav>
+
+    <!-- MOBILE BOTTOM SLIDE-UP DRAWER (TOOL MODAL) -->
+    <div id="m-tool-drawer" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-end hidden">
+        <div class="w-full bg-slate-900 rounded-t-2xl border-t border-slate-700 p-5 space-y-4 max-h-[85vh] overflow-y-auto">
+            
+            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                <h3 id="m-drawer-title" class="font-bold text-white text-sm">Interactive Advisory Tool</h3>
+                <button onclick="closeMobileTool()" class="text-slate-400 hover:text-white text-base">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- COMMUTE TOOL BODY -->
+            <div id="m-tool-commute-body" class="space-y-3 text-xs">
+                <div>
+                    <label class="block text-slate-300 font-semibold mb-1">Corporate Campus</label>
+                    <select class="w-full bg-slate-950 border border-slate-700 rounded-lg py-2.5 px-3 text-white">
+                        <option>Wipro Corporate HQ (Sarjapur Road)</option>
+                        <option>Prestige Tech Park / Ecospace (ORR)</option>
+                        <option>Manyata Business Park (Hebbal)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-slate-300 font-semibold mb-1">Max Drive Time: <span class="text-emerald-400 font-bold">< 20 Mins</span></label>
+                    <input type="range" min="5" max="45" value="20" class="w-full accent-emerald-400 bg-slate-800 rounded-lg h-2">
+                </div>
+                <button onclick="closeMobileTool()" class="w-full bg-emerald-500 text-slate-950 font-bold py-3 rounded-lg text-xs">
+                    Apply Filter to Allocations
+                </button>
+            </div>
+
+            <!-- CALCULATOR TOOL BODY -->
+            <div id="m-tool-calc-body" class="hidden space-y-3 text-xs">
+                <div>
+                    <div class="flex justify-between text-slate-300 font-semibold mb-1">
+                        <span>Property Value</span>
+                        <span id="m-calc-price" class="text-emerald-400 font-bold">₹1.25 Cr</span>
+                    </div>
+                    <input type="range" min="60" max="350" value="125" oninput="document.getElementById('m-calc-price').innerText = '₹' + (this.value/100).toFixed(2) + ' Cr'" class="w-full accent-emerald-400 bg-slate-800 rounded-lg h-2">
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-center pt-2">
+                    <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                        <span class="block text-[9px] text-slate-400">Est. EMI</span>
+                        <span class="text-xs font-bold text-white">₹86,430/mo</span>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                        <span class="block text-[9px] text-slate-400">Stamp Duty</span>
+                        <span class="text-xs font-bold text-white">₹7.00 Lakhs</span>
+                    </div>
+                </div>
+                <button onclick="closeMobileTool()" class="w-full bg-emerald-500 text-slate-950 font-bold py-3 rounded-lg text-xs">
+                    Done
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function openMobileTool(type) {
+            document.getElementById('m-tool-drawer').classList.remove('hidden');
+            if(type === 'commute') {
+                document.getElementById('m-drawer-title').innerText = "Peak-Hour Commute Radar";
+                document.getElementById('m-tool-commute-body').classList.remove('hidden');
+                document.getElementById('m-tool-calc-body').classList.add('hidden');
+            } else {
+                document.getElementById('m-drawer-title').innerText = "Financial & Statutory Studio";
+                document.getElementById('m-tool-commute-body').classList.add('hidden');
+                document.getElementById('m-tool-calc-body').classList.remove('hidden');
+            }
+        }
+
+        function closeMobileTool() {
+            document.getElementById('m-tool-drawer').classList.add('hidden');
+        }
+
+        function filterLens(type) {
+            const cards = document.querySelectorAll('.m-card');
+            let count = 0;
+            cards.forEach(card => {
+                if(type === 'all' || card.getAttribute('data-lens') === type) {
+                    card.classList.remove('hidden');
+                    count++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            document.getElementById('m-count').innerText = `${count} Allocations`;
+        }
+    </script>
+</body>
+</html>
