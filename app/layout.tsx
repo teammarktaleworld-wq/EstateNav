@@ -22,10 +22,10 @@ export const metadata: Metadata = {
     siteName: 'EstateNav',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80',
-        width: 1200,
-        height: 630,
-        alt: 'EstateNav Institutional Real Estate Advisory',
+        url: 'https://estatenav.vercel.app/logo-card.jpg',
+        width: 1422,
+        height: 1422,
+        alt: 'EstateNav Institutional Real Estate Advisory Logo',
       },
     ],
     locale: 'en_IN',
@@ -36,7 +36,8 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: '/favicon.svg',
+    icon: '/logo.png',
+    apple: '/logo.png',
   },
 };
 
@@ -58,6 +59,8 @@ export default function RootLayout({
     name: 'EstateNav',
     description: 'Institutional-grade real estate advisory and direct developer allocations in Bengaluru.',
     url: 'https://estatenav.vercel.app',
+    logo: 'https://estatenav.vercel.app/logo.png',
+    image: 'https://estatenav.vercel.app/logo-card.jpg',
     areaServed: ['Sarjapur Road', 'Whitefield', 'Outer Ring Road', 'Hebbal', 'Electronic City'],
     knowsAbout: [
       'K-RERA Compliance',

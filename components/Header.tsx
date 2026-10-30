@@ -20,13 +20,17 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="sticky top-0 z-50 bg-[#030712]/95 backdrop-blur-md border-b border-white/[0.08] transition-colors">
       <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 h-16 sm:h-20 flex items-center justify-between">
         
-        {/* Brand Mark */}
+        {/* Brand Mark with Official Logo */}
         <div 
           onClick={() => onSegmentChange('residential')}
           className="flex items-center space-x-3 cursor-pointer group select-none"
         >
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-[6px] bg-gradient-to-b from-brand-500 to-brand-700 flex items-center justify-center text-canvas-950 font-bold shadow-[0_1px_3px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.3)] group-hover:brightness-110 transition-all shrink-0">
-            <Compass className="w-5 h-5 text-canvas-950 stroke-[2.5]" />
+          <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-[6px] bg-[#070b13] border border-white/[0.12] p-1 flex items-center justify-center shrink-0 group-hover:border-brand-500/40 transition-all shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
+            <img
+              src="/logo.png"
+              alt="EstateNav Official Logo"
+              className="w-full h-full object-contain"
+            />
           </div>
           <div>
             <div className="flex items-center space-x-2">

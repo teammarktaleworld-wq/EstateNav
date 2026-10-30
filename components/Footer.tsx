@@ -13,9 +13,13 @@ export const Footer: React.FC = () => {
 
           {/* Brand */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-[6px] bg-brand-600 border border-brand-400/20 flex items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]">
-                <Compass className="w-4 h-4 text-brand-200" />
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-[6px] bg-[#070b13] border border-white/[0.12] p-1 flex items-center justify-center shrink-0 shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
+                <img
+                  src="/logo.png"
+                  alt="EstateNav Official Logo"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <span className="text-xl font-black tracking-tight text-white">
                 Estate<span className="text-brand-400">Nav</span>

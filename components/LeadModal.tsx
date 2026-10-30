@@ -99,8 +99,15 @@ export const LeadModal: React.FC<LeadModalProps> = ({
         {submitted ? (
           /* ── SUCCESS STATE ── */
           <div className="text-center py-5 space-y-4">
-            <div className="w-14 h-14 bg-brand-500/10 border border-brand-500/30 rounded-[8px] flex items-center justify-center mx-auto text-brand-400 shadow-inner">
-              <CheckCircle2 className="w-7 h-7 stroke-[2.2]" />
+            <div className="relative w-16 h-16 bg-[#040810] border border-brand-500/30 rounded-[8px] p-2 flex items-center justify-center mx-auto shadow-xl">
+              <img
+                src="/logo.png"
+                alt="EstateNav Official Logo"
+                className="w-full h-full object-contain"
+              />
+              <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-brand-500 flex items-center justify-center text-[#030712] shadow">
+                <CheckCircle2 className="w-3.5 h-3.5 stroke-[2.5]" />
+              </div>
             </div>
 
             <div>
@@ -149,9 +156,14 @@ export const LeadModal: React.FC<LeadModalProps> = ({
 
             {/* Modal Header */}
             <div>
-              <div className="inline-flex items-center gap-1.5 bg-brand-500/10 border border-brand-500/25 px-2.5 py-1 rounded-[4px] text-[10px] font-mono font-bold text-brand-400 uppercase tracking-wider mb-2">
-                <Lock className="w-3 h-3" />
-                100% Encrypted &amp; Zero-Spam Shield
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-6 h-6 rounded-[4px] bg-[#040810] border border-white/[0.12] p-0.5 flex items-center justify-center shrink-0">
+                  <img src="/logo.png" alt="EstateNav" className="w-full h-full object-contain" />
+                </div>
+                <div className="inline-flex items-center gap-1.5 bg-brand-500/10 border border-brand-500/25 px-2 py-0.5 rounded-[4px] text-[10px] font-mono font-bold text-brand-400 uppercase tracking-wider">
+                  <Lock className="w-3 h-3" />
+                  100% Encrypted &amp; Zero-Spam Shield
+                </div>
               </div>
 
               <h3 className="text-lg sm:text-xl font-black text-white tracking-tight">
