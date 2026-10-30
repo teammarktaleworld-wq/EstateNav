@@ -38,8 +38,8 @@ export const HeroFold: React.FC<HeroFoldProps> = ({
       description:
         'Institutional research, Kaveri 2.0 title audits, and direct developer pricing across Sarjapur, Whitefield & North Bengaluru corridors.',
       spotlightBadge: 'Partner Flagship Feature',
-      spotlightPartner: 'Abhee Ventures Anchor Partner',
-      spotlightTitle: 'Abhee Codename New Dimension',
+      spotlightPartner: 'Verified Primary Anchor',
+      spotlightTitle: 'Codename New Dimension',
       spotlightLoc: '45-Acre Scotland-Themed Township • Varthur-Sarjapur Link',
       spotlightPrice: '₹1.35 Cr Onwards',
       spotlightImg: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=80',
@@ -107,8 +107,8 @@ export const HeroFold: React.FC<HeroFoldProps> = ({
       description:
         'BDA & BMRDA approved freehold land plots with verified clear titles along Satellite Town Ring Road (STRR) & Whitefield Extension.',
       spotlightBadge: 'Plotted Reserve Feature',
-      spotlightPartner: 'Abhee Ventures Land Reserve',
-      spotlightTitle: 'Abhee Tranquila Plotted Enclave',
+      spotlightPartner: 'Freehold Land Reserve',
+      spotlightTitle: 'Tranquila Plotted Enclave',
       spotlightLoc: 'Sarjapur-Attibele Corridor • Direct STRR Link',
       spotlightPrice: '₹90 Lakhs Onwards',
       spotlightImg: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1400&q=80',

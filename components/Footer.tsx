@@ -145,7 +145,7 @@ export const Footer: React.FC = () => {
             EstateNav is an independent advisory portal and authorized channel partner platform operated by
             SV Praveen (RERA No. PRM/KA/RERA/1251/310/AG/260916/007810), not the official developer website.
             All project brand names, layouts, and renderings belong to their respective developers
-            (including Abhee Ventures Private Limited) and are displayed strictly for institutional advisory under direct developer terms.
+            and are displayed strictly for institutional advisory under direct developer terms.
           </p>
         </div>
 

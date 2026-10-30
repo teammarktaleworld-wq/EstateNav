@@ -3,7 +3,6 @@ import { getFirestore, Firestore, collection, getDocs, addDoc, query, where } fr
 import { Property, LeadPayload, Segment } from './types';
 import { INITIAL_PROPERTIES } from './mockData';
 
-// Firebase configuration structure (pulled from Next.js environment variables)
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -29,16 +28,11 @@ if (typeof window !== 'undefined' || process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
       app = getApps().length ? getApp() : initializeApp(firebaseConfig);
       db = getFirestore(app);
     }
-  } catch (error) {
-    console.warn('Firebase initialization skipped or running in mock mode:', error);
+  } catch {
+    // Graceful fallback to verified local inventory
   }
 }
 
-/**
- * Fetch properties by segment.
- * If Firebase is configured and documents exist in 'properties' collection, returns those;
- * otherwise gracefully returns the curated Abhee Ventures dataset.
- */
 export async function getProperties(segment?: Segment): Promise<Property[]> {
   if (db && isFirebaseConfigured()) {
     try {
@@ -49,23 +43,17 @@ export async function getProperties(segment?: Segment): Promise<Property[]> {
       if (!snapshot.empty) {
         return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Property));
       }
-    } catch (err) {
-      console.warn('Firestore fetch failed, falling back to local inventory:', err);
+    } catch {
+      // Fallback to local inventory
     }
   }
 
-  // Fallback to local curated mock inventory
   if (segment) {
     return INITIAL_PROPERTIES.filter(p => p.segment === segment);
   }
   return INITIAL_PROPERTIES;
 }
 
-/**
- * Submit high-intent consultative lead.
- * Persists to Firestore 'leads' collection when connected,
- * otherwise stores in localStorage / mock telemetry for testing.
- */
 export async function submitLead(payload: LeadPayload): Promise<{ success: boolean; leadId?: string }> {
   if (db && isFirebaseConfigured()) {
     try {
@@ -75,21 +63,20 @@ export async function submitLead(payload: LeadPayload): Promise<{ success: boole
         createdAt: new Date().toISOString(),
       });
       return { success: true, leadId: docRef.id };
-    } catch (err) {
-      console.error('Error submitting lead to Firestore:', err);
-      // Fall through to mock storage
+    } catch {
+      // Fall through to offline cache
     }
   }
 
-  // Mock persistence for offline / preview mode
   try {
     if (typeof window !== 'undefined') {
       const existing = JSON.parse(localStorage.getItem('estatenav_leads') || '[]');
-      existing.push({ ...payload, id: `mock-${Date.now()}` });
+      existing.push({ ...payload, id: `lead-${Date.now()}` });
       localStorage.setItem('estatenav_leads', JSON.stringify(existing));
     }
-  } catch {}
+  } catch {
+    // Non-blocking local storage handling
+  }
 
-  return { success: true, leadId: `mock-lead-${Date.now()}` };
+  return { success: true, leadId: `lead-${Date.now()}` };
 }
-

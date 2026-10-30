@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Handshake, Award, ShieldCheck, Building, FileCheck2, ArrowRight } from 'lucide-react';
-import { ADVISOR_NAME, ADVISOR_PHONE_DISPLAY, getWhatsAppUrl } from '@/lib/contact';
+import { getWhatsAppUrl } from '@/lib/contact';
 
 interface DeveloperTrustBannerProps {
   onUnlockPricing: () => void;
@@ -12,27 +12,25 @@ export const DeveloperTrustBanner: React.FC<DeveloperTrustBannerProps> = ({
   onUnlockPricing,
 }) => {
   return (
-    <section id="abhee-spotlight" className="py-10 sm:py-16 bg-[#030712] border-b border-white/[0.08] relative overflow-hidden bg-tech-grid">
+    <section id="trust-mandate" className="py-10 sm:py-16 bg-[#030712] border-b border-white/[0.08] relative overflow-hidden bg-tech-grid">
       <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-start">
 
-          {/* Left Column */}
           <div className="lg:col-span-5 space-y-4 sm:space-y-5">
             <div className="inline-flex items-center space-x-2 text-[10px] sm:text-[11px] font-mono font-medium text-brand-300 bg-brand-500/[0.07] px-3 py-1 rounded-[4px] border border-brand-500/25 tracking-wider uppercase">
               <Handshake className="w-3.5 h-3.5" />
-              <span>Anchor Developer Partnership</span>
+              <span>Direct Developer Mandate</span>
             </div>
 
             <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight leading-[1.12]">
-              The Abhee Advantage
-              <span className="block text-slate-300 text-xl sm:text-3xl font-semibold mt-1">Built for Bengaluru&apos;s Urban Future.</span>
+              Institutional Grade Advisory
+              <span className="block text-slate-300 text-xl sm:text-3xl font-semibold mt-1">Built for Bengaluru&apos;s Urban Leaders.</span>
             </h2>
 
             <p className="text-xs sm:text-base text-slate-300 leading-relaxed">
-              Direct institutional advisory with Abhee Ventures guarantees verified price transparency, zero brokerage overheads, and prioritized allocation for high-demand layouts.
+              Direct developer terms guarantee institutional price transparency, zero brokerage overheads, and prioritized allocation for primary high-demand residential and plotted corridors.
             </p>
 
-            {/* Stat Row */}
             <div className="grid grid-cols-3 gap-0 border border-white/[0.08] rounded-[6px] overflow-hidden">
               <div className="p-3 sm:p-5 text-center border-r border-white/[0.08] bg-[#060b14]">
                 <span className="text-xl sm:text-3xl font-black text-brand-400 font-mono block">15+</span>
@@ -68,7 +66,6 @@ export const DeveloperTrustBanner: React.FC<DeveloperTrustBannerProps> = ({
             </div>
           </div>
 
-          {/* Right Column: 2×2 Feature Grid */}
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/[0.08] border border-white/[0.08] rounded-[8px] overflow-hidden">
 
             <div className="p-4 sm:p-6 bg-[#070b13] hover:bg-[#0a0f1b] transition-colors space-y-2.5 group">

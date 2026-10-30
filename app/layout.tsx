@@ -11,11 +11,10 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: 'EstateNav — Bengaluru Real Estate Advisory Engine | Kaveri 2.0 Audited',
-  description: 'Institutional-grade research, Kaveri 2.0 title audits, and direct developer allocations across Sarjapur, Whitefield & North Bengaluru corridors. Authorized channel partner for Abhee Ventures.',
+  description: 'Institutional-grade research, Kaveri 2.0 title audits, and direct developer allocations across Sarjapur, Whitefield & North Bengaluru corridors. Authorized channel partner advisory.',
   keywords: [
     'Bengaluru Real Estate',
-    'Abhee Ventures',
-    'Abhee Codename New Dimension',
+    'Codename New Dimension',
     'Sarjapur Road Apartments',
     'Whitefield Flats',
     'Kaveri 2.0 audited properties',
@@ -74,7 +73,6 @@ export default function RootLayout({
       'K-RERA Compliance',
       'Kaveri 2.0 Title Clearances',
       'Direct Developer Allocations',
-      'Abhee Ventures Projects',
     ],
     contactPoint: {
       '@type': 'ContactPoint',
