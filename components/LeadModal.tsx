@@ -312,7 +312,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
               <div className="bg-[#040810] rounded-[6px] border border-white/[0.07] p-3 text-[10px] text-slate-400 leading-relaxed">
                 <span className="font-semibold text-slate-300">Mandatory Channel Partner Disclosure: </span>
                 By submitting this form, you consent to registering your inquiry through{' '}
-                <strong className="text-slate-200">{ADVISOR_NAME}</strong>, authorized Channel Partner. Official sales communications are coordinated directly under developer terms with zero brokerage.
+                <strong className="text-slate-200">{ADVISOR_NAME}</strong>, authorized Channel Partner.
               </div>
 
               {/* Submit CTA */}

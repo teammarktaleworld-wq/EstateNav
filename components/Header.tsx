@@ -41,8 +41,8 @@ export const Header: React.FC<HeaderProps> = ({
                 ADVISORY
               </span>
             </div>
-            <span className="block text-[9px] sm:text-[10px] uppercase tracking-widest text-slate-400 font-mono">
-              Bengaluru Direct Developer Engine
+            <span className="block text-[9px] sm:text-[10px] text-slate-400 font-medium tracking-normal">
+              Smart Investments, Better Living, Great Possibilities
             </span>
           </div>
         </div>

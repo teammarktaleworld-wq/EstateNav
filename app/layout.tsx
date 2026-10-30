@@ -10,8 +10,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: 'EstateNav — Bengaluru Real Estate Advisory Engine | Kaveri 2.0 Audited',
-  description: 'Institutional-grade research, Kaveri 2.0 title audits, and direct developer allocations across Sarjapur, Whitefield & North Bengaluru corridors. Authorized channel partner advisory.',
+  title: 'EstateNav — Smart Investments, Better Living, Great Possibilities',
+  description: 'EstateNav: Smart Investments, Better Living, Great Possibilities. Institutional-grade research, Kaveri 2.0 title audits, and direct verified allocations across Bengaluru corridors.',
   keywords: [
     'Bengaluru Real Estate',
     'Codename New Dimension',

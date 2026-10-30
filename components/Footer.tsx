@@ -27,8 +27,8 @@ export const Footer: React.FC = () => {
                   ADVISORY
                 </span>
               </div>
-              <span className="block text-[9px] sm:text-[10px] uppercase tracking-widest text-slate-400 font-mono mt-0.5">
-                Bengaluru Direct Developer Engine
+              <span className="block text-[9px] sm:text-[10px] text-slate-400 font-medium mt-0.5 tracking-normal">
+                Smart Investments, Better Living, Great Possibilities
               </span>
             </div>
           </div>
