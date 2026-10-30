@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, ShieldCheck, CheckCircle2, Lock, ArrowRight, Sparkles, Building2 } from 'lucide-react';
+import { X, ShieldCheck, CheckCircle2, Lock, ArrowRight, Building2, MessageCircle, Phone, Mail } from 'lucide-react';
 import { Property, LeadPayload } from '@/lib/types';
 import { submitLead } from '@/lib/firebase';
+import { ADVISOR_NAME, ADVISOR_PHONE_DISPLAY, getWhatsAppUrl, getEmailUrl, getTelUrl } from '@/lib/contact';
 
 interface LeadModalProps {
   isOpen: boolean;
@@ -58,85 +59,138 @@ export const LeadModal: React.FC<LeadModalProps> = ({
     onClose();
   };
 
+  const whatsappLink = getWhatsAppUrl(selectedProperty);
+  const emailLink = getEmailUrl(selectedProperty);
+  const telLink = getTelUrl();
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-canvas-950/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div 
-        className="relative w-full max-w-lg bg-canvas-900 border border-white/[0.12] rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden"
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-150"
+      onClick={handleReset}
+    >
+      <div
+        className="relative w-full max-w-lg bg-[#080d16] border border-white/[0.14] rounded-[8px] p-5 sm:p-7 shadow-2xl overflow-hidden max-h-[92vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        
-        {/* Close Button */}
+
+        {/* Close */}
         <button
           onClick={handleReset}
-          className="absolute top-5 right-5 text-slate-400 hover:text-white p-1 rounded-lg hover:bg-white/[0.05] transition-colors"
+          className="btn-ghost absolute top-3.5 right-3.5 p-1.5"
+          aria-label="Close"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
 
         {submitted ? (
-          /* Submission Success State */
-          <div className="text-center py-6 space-y-4">
-            <div className="w-14 h-14 bg-brand-500/10 border border-brand-500/30 rounded-2xl flex items-center justify-center mx-auto text-brand-400">
-              <CheckCircle2 className="w-8 h-8" />
+          /* ── Success State ── */
+          <div className="text-center py-5 space-y-4">
+            <div className="w-12 h-12 bg-brand-500/10 border border-brand-500/25 rounded-[6px] flex items-center justify-center mx-auto text-brand-400">
+              <CheckCircle2 className="w-6 h-6" />
             </div>
 
-            <h3 className="text-xl font-extrabold text-white">
-              Official Allocation Access Granted
-            </h3>
+            <div>
+              <h3 className="text-lg sm:text-xl font-black text-white tracking-tight">
+                Official Allocation Access Granted
+              </h3>
+              <p className="text-xs text-slate-300 max-w-sm mx-auto leading-relaxed mt-1.5">
+                Your dossier for{' '}
+                <strong className="text-white">{selectedProperty?.name || 'Abhee Projects'}</strong>{' '}
+                has been registered. Institutional advisor {ADVISOR_NAME} will transmit the
+                direct pricing sheet to <strong className="text-brand-300">{phone}</strong>.
+              </p>
+            </div>
 
-            <p className="text-xs sm:text-sm text-slate-300 max-w-sm mx-auto leading-relaxed">
-              Your dossier for <strong className="text-white">{selectedProperty?.name || 'Abhee Projects'}</strong> has been registered. An institutional advisor from SV Praveen&apos;s desk will transmit the direct pricing sheet and floorplates to <strong className="text-brand-300">{phone}</strong>.
-            </p>
+            {/* Quick 1-tap WhatsApp button right on success */}
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 bg-[#25D366] text-[#030712] font-black text-xs py-2.5 px-4 rounded-[6px] shadow transition-transform active:scale-[0.98]"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>Connect on WhatsApp Now</span>
+            </a>
 
-            <div className="p-4 bg-canvas-950 rounded-xl border border-white/[0.08] text-left text-xs text-slate-300 space-y-2">
-              <div className="flex items-center space-x-2 text-brand-400 font-semibold">
-                <ShieldCheck className="w-4 h-4" />
+            <div className="bg-[#040810] rounded-[6px] border border-white/[0.07] p-3 text-left text-xs text-slate-300 space-y-1">
+              <div className="flex items-center gap-1.5 text-brand-400 font-semibold text-[11px]">
+                <ShieldCheck className="w-3.5 h-3.5" />
                 <span>Authorized Channel Partner Desk</span>
               </div>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[10px] text-slate-400 font-mono">
                 K-RERA Reg: PRM/KA/RERA/1251/310/AG/260916/007810 • Direct Developer Terms.
               </p>
             </div>
 
-            <button
-              onClick={handleReset}
-              className="w-full bg-brand-500 hover:bg-brand-400 text-canvas-950 font-bold text-xs py-3 rounded-xl transition-all shadow"
-            >
-              Done & Return to Explorer
+            <button onClick={handleReset} className="btn-secondary w-full py-2.5 text-xs">
+              Done — Return to Explorer
             </button>
           </div>
         ) : (
-          /* Form Input State */
+          /* ── Form State ── */
           <div className="space-y-4">
-            
-            {/* Header info */}
+
+            {/* Header */}
             <div>
-              <div className="inline-flex items-center space-x-1.5 bg-brand-500/10 border border-brand-500/20 px-2.5 py-0.5 rounded-full text-[10px] font-bold text-brand-400 uppercase tracking-wider mb-2">
+              <div className="inline-flex items-center gap-1.5 bg-brand-500/10 border border-brand-500/20 px-2 py-0.5 rounded-[4px] text-[10px] font-mono font-bold text-brand-400 uppercase tracking-wider mb-2">
                 <Lock className="w-3 h-3" />
-                <span>Zero-Spam Privacy Shield</span>
+                Zero-Spam Privacy Shield
               </div>
 
-              <h3 className="text-lg sm:text-xl font-extrabold text-white tracking-tight">
+              <h3 className="text-base sm:text-lg font-black text-white tracking-tight">
                 {actionTitle}
               </h3>
 
               {selectedProperty ? (
-                <div className="flex items-center space-x-2 text-xs text-slate-300 mt-1">
+                <div className="flex items-center gap-1.5 text-xs text-slate-300 mt-1">
                   <Building2 className="w-3.5 h-3.5 text-brand-400" />
-                  <span>{selectedProperty.name} • {selectedProperty.priceDisplay}</span>
+                  <span>{selectedProperty.name} · {selectedProperty.priceDisplay}</span>
                 </div>
               ) : (
                 <p className="text-xs text-slate-400 mt-0.5">
-                  Direct developer allocations with institutional research & title clearance.
+                  Direct developer allocations with institutional research &amp; title clearance.
                 </p>
               )}
             </div>
 
+            {/* Instant Contact Short-circuit Bar */}
+            <div className="bg-[#040810] rounded-[6px] border border-white/[0.07] p-2.5 space-y-2">
+              <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
+                <span>INSTANT ADVISOR CONNECT</span>
+                <span className="text-brand-400">{ADVISOR_NAME}</span>
+              </div>
+              <div className="grid grid-cols-3 gap-1.5">
+                <a
+                  href={whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-1 bg-[#25D366]/15 hover:bg-[#25D366]/25 text-[#25D366] border border-[#25D366]/30 py-1.5 px-2 rounded-[4px] text-[11px] font-bold"
+                >
+                  <MessageCircle className="w-3 h-3" />
+                  <span>WhatsApp</span>
+                </a>
+                <a
+                  href={telLink}
+                  className="flex items-center justify-center gap-1 bg-white/[0.04] hover:bg-white/[0.08] text-slate-200 border border-white/[0.1] py-1.5 px-2 rounded-[4px] text-[11px] font-medium"
+                >
+                  <Phone className="w-3 h-3 text-brand-400" />
+                  <span>Call</span>
+                </a>
+                <a
+                  href={emailLink}
+                  className="flex items-center justify-center gap-1 bg-white/[0.04] hover:bg-white/[0.08] text-slate-200 border border-white/[0.1] py-1.5 px-2 rounded-[4px] text-[11px] font-medium"
+                >
+                  <Mail className="w-3 h-3 text-brand-400" />
+                  <span>Email</span>
+                </a>
+              </div>
+            </div>
+
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-3.5">
-              
+            <form onSubmit={handleSubmit} className="space-y-3">
+
               <div>
-                <label className="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
                   Full Name *
                 </label>
                 <input
@@ -145,13 +199,13 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Karthik Ramamurthy"
-                  className="w-full bg-canvas-950 border border-slate-700/80 rounded-xl text-xs py-2.5 px-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors"
+                  className="field-input py-2 px-3 text-xs"
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
                     WhatsApp / Mobile *
                   </label>
                   <input
@@ -160,12 +214,12 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+91 98800 XXXXX"
-                    className="w-full bg-canvas-950 border border-slate-700/80 rounded-xl text-xs py-2.5 px-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors"
+                    className="field-input py-2 px-3 text-xs"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
                     Work Email (Optional)
                   </label>
                   <input
@@ -173,19 +227,19 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="karthik@company.com"
-                    className="w-full bg-canvas-950 border border-slate-700/80 rounded-xl text-xs py-2.5 px-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors"
+                    className="field-input py-2 px-3 text-xs"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
                   Target Possession Horizon
                 </label>
                 <select
                   value={timeline}
                   onChange={(e) => setTimeline(e.target.value)}
-                  className="w-full bg-canvas-950 border border-slate-700/80 rounded-xl text-xs py-2.5 px-3 text-white focus:outline-none focus:border-brand-500 transition-colors"
+                  className="field-input py-2 px-3 text-xs"
                 >
                   <option>Ready to Move / Within 3 Months</option>
                   <option>December 2026 (Under Construction)</option>
@@ -194,22 +248,22 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                 </select>
               </div>
 
-              {/* Mandatory Compliance Subtitle Annotation (Blueprint Slide 14) */}
-              <div className="p-3 bg-canvas-950/80 rounded-xl border border-white/[0.06] text-[10px] text-slate-400 leading-relaxed">
-                <span className="font-semibold text-slate-300">Mandatory Channel Partner Disclosure:</span> By submitting this form, you consent to registering your inquiry through <strong>SV Praveen</strong>, authorized Channel Partner for <strong>Abhee Ventures</strong>. Official sales communications are coordinated directly under developer pricing terms with zero brokerage.
+              {/* Mandatory disclosure */}
+              <div className="bg-[#040810] rounded-[6px] border border-white/[0.07] p-2.5 text-[10px] text-slate-400 leading-relaxed">
+                <span className="font-semibold text-slate-300">Channel Partner Disclosure: </span>
+                Inquiry registered via <strong>{ADVISOR_NAME}</strong>, authorized Channel Partner for <strong>Abhee Ventures</strong>. Official developer terms, zero brokerage.
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-brand-500 hover:bg-brand-400 disabled:opacity-50 text-canvas-950 font-extrabold text-xs sm:text-sm py-3 rounded-xl transition-all shadow-md shadow-brand-500/20 flex items-center justify-center space-x-2"
+                className="btn-primary w-full py-3 font-bold flex items-center justify-center gap-2 text-xs"
               >
                 <span>{isSubmitting ? 'Verifying Allocation...' : 'Unlock Direct Developer Pricing'}</span>
-                <ArrowRight className="w-4 h-4 text-canvas-950" />
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
 
             </form>
-
           </div>
         )}
 
@@ -217,4 +271,3 @@ export const LeadModal: React.FC<LeadModalProps> = ({
     </div>
   );
 };
-

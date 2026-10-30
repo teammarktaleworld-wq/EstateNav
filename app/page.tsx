@@ -94,7 +94,7 @@ export default function Home() {
       {/* Main Content Area */}
       <main className="flex-grow">
         
-        {/* Fold 1: Asymmetric Hero Showcase */}
+        {/* Fold 1: Hero Showcase (Ultra-clean on mobile, spotlight hidden on small screens) */}
         <HeroFold
           segment={currentSegment}
           selectedMicroMarket={selectedMicroMarket}
@@ -105,15 +105,12 @@ export default function Home() {
           onInspectSpotlight={handleInspectSpotlight}
         />
 
-        {/* Fold 2: Dynamic Corridor Telemetry Ticker */}
-        <TelemetryTicker />
+        {/* Fold 2: Telemetry Ticker (Desktop only — hides from mobile to eliminate dead scroll space) */}
+        <div className="hidden md:block">
+          <TelemetryTicker />
+        </div>
 
-        {/* Fold 3: Inlined Abhee Ventures Partnership Section */}
-        <DeveloperTrustBanner
-          onUnlockPricing={handleUnlockDeveloperPricing}
-        />
-
-        {/* Fold 4: Split Workspace Engine (Tools Left / Grid Right) */}
+        {/* Fold 3: LIVE PROPERTY ALLOCATIONS (Directly visible on mobile with 0 clutter!) */}
         <WorkspaceEngine
           properties={properties}
           onInspectProperty={handleInspectProperty}
@@ -121,12 +118,17 @@ export default function Home() {
           initialBudget={selectedBudget}
         />
 
+        {/* Fold 4: Abhee Ventures Developer Partnership Section (Positioned after properties so mobile users aren't blocked) */}
+        <DeveloperTrustBanner
+          onUnlockPricing={handleUnlockDeveloperPricing}
+        />
+
       </main>
 
       {/* Immutable Regulatory Footer */}
       <Footer />
 
-      {/* App-Style Fixed Mobile Bottom Nav */}
+      {/* App-Style Fixed Mobile Bottom Nav with direct WhatsApp/Call/Email triggers */}
       <MobileBottomNav
         onOpenVipModal={handleOpenVipTour}
       />
@@ -142,4 +144,3 @@ export default function Home() {
     </div>
   );
 }
-

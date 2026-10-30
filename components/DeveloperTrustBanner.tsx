@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Handshake, Award, ShieldCheck, Building, CheckCircle2, FileCheck2, ArrowRight } from 'lucide-react';
+import { Handshake, Award, ShieldCheck, Building, FileCheck2, ArrowRight } from 'lucide-react';
+import { ADVISOR_NAME, ADVISOR_PHONE_DISPLAY, getWhatsAppUrl } from '@/lib/contact';
 
 interface DeveloperTrustBannerProps {
   onUnlockPricing: () => void;
@@ -11,98 +12,102 @@ export const DeveloperTrustBanner: React.FC<DeveloperTrustBannerProps> = ({
   onUnlockPricing,
 }) => {
   return (
-    <section id="abhee-spotlight" className="py-12 sm:py-16 bg-canvas-900 border-b border-white/[0.08] relative overflow-hidden">
-      
-      {/* Background architectural grid highlight */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none" />
+    <section id="abhee-spotlight" className="py-10 sm:py-16 bg-[#030712] border-b border-white/[0.08] relative overflow-hidden bg-tech-grid">
+      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-start">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="bg-canvas-950 p-6 sm:p-8 lg:p-10 rounded-3xl border border-white/[0.09] shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          
-          {/* Left Column: Developer Overview & Credentials */}
-          <div className="lg:col-span-5 space-y-4">
-            
-            <div className="inline-flex items-center space-x-2 text-brand-400 text-xs font-bold uppercase tracking-widest bg-brand-500/10 px-3 py-1 rounded-full border border-brand-500/20">
+          {/* Left Column */}
+          <div className="lg:col-span-5 space-y-4 sm:space-y-5">
+            <div className="inline-flex items-center space-x-2 text-[10px] sm:text-[11px] font-mono font-medium text-brand-300 bg-brand-500/[0.07] px-3 py-1 rounded-[4px] border border-brand-500/25 tracking-wider uppercase">
               <Handshake className="w-3.5 h-3.5" />
               <span>Anchor Developer Partnership</span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
-              The Abhee Advantage: Built for Bengaluru&apos;s Urban Future
+            <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight leading-[1.12]">
+              The Abhee Advantage
+              <span className="block text-slate-300 text-xl sm:text-3xl font-semibold mt-1">Built for Bengaluru&apos;s Urban Future.</span>
             </h2>
 
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              EstateNav&apos;s premier advisory partnership with Abhee Ventures guarantees institutional price transparency, zero brokerage overheads, and prioritized allocation for high-demand 2, 3, 3.5 & 4.5 BHK layouts.
+            <p className="text-xs sm:text-base text-slate-300 leading-relaxed">
+              Direct institutional advisory with Abhee Ventures guarantees verified price transparency, zero brokerage overheads, and prioritized allocation for high-demand layouts.
             </p>
 
-            {/* Key Metric Stats */}
-            <div className="pt-3 grid grid-cols-3 gap-3 border-t border-white/[0.08] text-center sm:text-left">
-              <div>
-                <span className="text-xl sm:text-2xl font-extrabold text-brand-400 font-mono block">15+ Yrs</span>
-                <span className="text-[11px] text-slate-400 font-medium">Proven Track Record</span>
+            {/* Stat Row */}
+            <div className="grid grid-cols-3 gap-0 border border-white/[0.08] rounded-[6px] overflow-hidden">
+              <div className="p-3 sm:p-5 text-center border-r border-white/[0.08] bg-[#060b14]">
+                <span className="text-xl sm:text-3xl font-black text-brand-400 font-mono block">15+</span>
+                <span className="text-[10px] sm:text-[11px] text-slate-400 font-medium mt-1 block">Years Track<br/>Record</span>
               </div>
-              <div className="border-l border-white/[0.08] pl-3">
-                <span className="text-xl sm:text-2xl font-extrabold text-brand-400 font-mono block">3.5M+</span>
-                <span className="text-[11px] text-slate-400 font-medium">Sq.Ft Delivered</span>
+              <div className="p-3 sm:p-5 text-center border-r border-white/[0.08] bg-[#060b14]">
+                <span className="text-xl sm:text-3xl font-black text-brand-400 font-mono block">3.5M+</span>
+                <span className="text-[10px] sm:text-[11px] text-slate-400 font-medium mt-1 block">Sq.Ft<br/>Delivered</span>
               </div>
-              <div className="border-l border-white/[0.08] pl-3">
-                <span className="text-xl sm:text-2xl font-extrabold text-brand-400 font-mono block">Mivan</span>
-                <span className="text-[11px] text-slate-400 font-medium">Formwork Tech</span>
+              <div className="p-3 sm:p-5 text-center bg-[#060b14]">
+                <span className="text-xl sm:text-3xl font-black text-brand-400 font-mono block">Mivan</span>
+                <span className="text-[10px] sm:text-[11px] text-slate-400 font-medium mt-1 block">Formwork<br/>Tech</span>
               </div>
             </div>
 
-            <div className="pt-2">
+            <div className="flex flex-col sm:flex-row gap-2.5 pt-1">
               <button
                 onClick={onUnlockPricing}
-                className="inline-flex items-center space-x-2 bg-brand-500 hover:bg-brand-400 text-canvas-950 font-bold text-xs px-5 py-2.5 rounded-xl transition-all shadow-md shadow-brand-500/20"
+                className="btn-primary px-5 py-3 space-x-2 text-xs sm:text-sm font-bold flex items-center justify-center"
               >
-                <span>Unlock Direct Developer Pricing Sheet</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <span>Unlock Direct Developer Pricing</span>
+                <ArrowRight className="w-4 h-4 text-canvas-950 stroke-[2.5]" />
               </button>
-            </div>
 
+              <a
+                href={getWhatsAppUrl(null)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary px-4 py-3 text-xs sm:text-sm font-semibold flex items-center justify-center text-[#25D366]"
+              >
+                <span>Chat with Advisor</span>
+              </a>
+            </div>
           </div>
 
-          {/* Right Column: 2x2 Value Proposition Grid */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            
-            <div className="p-5 bg-canvas-900 rounded-2xl border border-white/[0.08] space-y-2.5 hover:border-brand-500/40 transition-colors">
-              <div className="w-9 h-9 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400">
-                <ShieldCheck className="w-5 h-5" />
+          {/* Right Column: 2×2 Feature Grid */}
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/[0.08] border border-white/[0.08] rounded-[8px] overflow-hidden">
+
+            <div className="p-4 sm:p-6 bg-[#070b13] hover:bg-[#0a0f1b] transition-colors space-y-2.5 group">
+              <div className="w-9 h-9 rounded-[6px] bg-brand-500/[0.08] border border-brand-500/25 flex items-center justify-center text-brand-400 group-hover:bg-brand-500/15 transition-colors">
+                <ShieldCheck className="w-4 h-4 stroke-[1.8]" />
               </div>
-              <h3 className="font-bold text-sm text-white">100% Legal & Title Clear</h3>
+              <h3 className="font-bold text-sm text-white tracking-tight">100% Legal &amp; Title Clear</h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Complete A-Khata, BBMP & BDA sanctioned plans, with digitized Kaveri 2.0 encumbrance audit dossiers.
+                Complete A-Khata, BBMP &amp; BDA sanctioned plans with digitized Kaveri 2.0 encumbrance audit dossiers.
               </p>
             </div>
 
-            <div className="p-5 bg-canvas-900 rounded-2xl border border-white/[0.08] space-y-2.5 hover:border-brand-500/40 transition-colors">
-              <div className="w-9 h-9 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400">
-                <Building className="w-5 h-5" />
+            <div className="p-4 sm:p-6 bg-[#070b13] hover:bg-[#0a0f1b] transition-colors space-y-2.5 group">
+              <div className="w-9 h-9 rounded-[6px] bg-brand-500/[0.08] border border-brand-500/25 flex items-center justify-center text-brand-400 group-hover:bg-brand-500/15 transition-colors">
+                <Building className="w-4 h-4 stroke-[1.8]" />
               </div>
-              <h3 className="font-bold text-sm text-white">Integrated Townships</h3>
+              <h3 className="font-bold text-sm text-white tracking-tight">Integrated Townships</h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Expansive biophilic masterplans with 75%+ open green spaces, international golf zones, and sports ecosystems.
+                Biophilic masterplans with 75%+ open greenery, golf zones, and integrated sports ecosystems.
               </p>
             </div>
 
-            <div className="p-5 bg-canvas-900 rounded-2xl border border-white/[0.08] space-y-2.5 hover:border-brand-500/40 transition-colors">
-              <div className="w-9 h-9 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400">
-                <FileCheck2 className="w-5 h-5" />
+            <div className="p-4 sm:p-6 bg-[#070b13] hover:bg-[#0a0f1b] transition-colors space-y-2.5 group">
+              <div className="w-9 h-9 rounded-[6px] bg-brand-500/[0.08] border border-brand-500/25 flex items-center justify-center text-brand-400 group-hover:bg-brand-500/15 transition-colors">
+                <FileCheck2 className="w-4 h-4 stroke-[1.8]" />
               </div>
-              <h3 className="font-bold text-sm text-white">Bank APF Approved</h3>
+              <h3 className="font-bold text-sm text-white tracking-tight">Bank APF Pre-Approved</h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Pre-approved home loan codes across HDFC, ICICI, and SBI for seamless disbursement and expedited processing.
+                Pre-approved home loan codes across HDFC, ICICI, and SBI for expedited closing.
               </p>
             </div>
 
-            <div className="p-5 bg-canvas-900 rounded-2xl border border-white/[0.08] space-y-2.5 hover:border-brand-500/40 transition-colors">
-              <div className="w-9 h-9 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400">
-                <Award className="w-5 h-5" />
+            <div className="p-4 sm:p-6 bg-[#070b13] hover:bg-[#0a0f1b] transition-colors space-y-2.5 group">
+              <div className="w-9 h-9 rounded-[6px] bg-brand-500/[0.08] border border-brand-500/25 flex items-center justify-center text-brand-400 group-hover:bg-brand-500/15 transition-colors">
+                <Award className="w-4 h-4 stroke-[1.8]" />
               </div>
-              <h3 className="font-bold text-sm text-white">Zero Brokerage Guarantee</h3>
+              <h3 className="font-bold text-sm text-white tracking-tight">Zero Brokerage Guarantee</h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Direct buyer-developer onboarding: no hidden commissions, no markup, and genuine pre-launch pricing privileges.
+                Direct buyer-developer onboarding — no hidden commissions, genuine pre-launch pricing privileges.
               </p>
             </div>
 
@@ -113,4 +118,3 @@ export const DeveloperTrustBanner: React.FC<DeveloperTrustBannerProps> = ({
     </section>
   );
 };
-

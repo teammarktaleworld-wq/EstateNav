@@ -1,8 +1,9 @@
 'use client';
 
 import React from 'react';
-import { Compass, ShieldCheck, Calendar, Building2, Home, MapPin, Sparkles } from 'lucide-react';
+import { Compass, ShieldCheck, Calendar, Building2, Home, MapPin, MessageCircle, Phone } from 'lucide-react';
 import { Segment } from '@/lib/types';
+import { getWhatsAppUrl, getTelUrl } from '@/lib/contact';
 
 interface HeaderProps {
   currentSegment: Segment;
@@ -16,39 +17,39 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenVipModal,
 }) => {
   return (
-    <header className="sticky top-0 z-50 bg-canvas-950/90 backdrop-blur-md border-b border-white/[0.08] transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <header className="sticky top-0 z-50 bg-[#030712]/95 backdrop-blur-md border-b border-white/[0.08] transition-colors">
+      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 h-16 sm:h-20 flex items-center justify-between">
         
         {/* Brand Mark */}
         <div 
           onClick={() => onSegmentChange('residential')}
-          className="flex items-center space-x-3 cursor-pointer group"
+          className="flex items-center space-x-3 cursor-pointer group select-none"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center text-white shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
-            <Compass className="w-5 h-5 text-white" />
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-[6px] bg-gradient-to-b from-brand-500 to-brand-700 flex items-center justify-center text-canvas-950 font-bold shadow-[0_1px_3px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.3)] group-hover:brightness-110 transition-all shrink-0">
+            <Compass className="w-5 h-5 text-canvas-950 stroke-[2.5]" />
           </div>
           <div>
-            <div className="flex items-center space-x-1.5">
-              <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
+            <div className="flex items-center space-x-2">
+              <span className="text-lg sm:text-2xl font-black tracking-tight text-white">
                 Estate<span className="text-brand-400">Nav</span>
               </span>
-              <span className="text-[10px] px-1.5 py-0.5 rounded font-mono font-bold bg-white/[0.06] text-slate-300 border border-white/[0.08]">
-                2.0
+              <span className="hidden sm:inline-block text-[10px] px-1.5 py-0.2 rounded font-mono font-semibold bg-white/[0.06] text-slate-300 border border-white/[0.1]">
+                ADVISORY
               </span>
             </div>
-            <span className="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold">
-              Bengaluru Advisory Engine
+            <span className="block text-[9px] sm:text-[10px] uppercase tracking-wider text-slate-400 font-medium">
+              Bengaluru Direct Developer Engine
             </span>
           </div>
         </div>
 
         {/* Global Segment Switcher (Desktop) */}
-        <nav className="hidden md:flex bg-canvas-900/90 p-1.5 rounded-full border border-white/[0.08] shadow-inner">
+        <nav className="hidden md:flex bg-[#070b13] p-1 rounded-lg border border-white/[0.08] shadow-inner space-x-1">
           <button
             onClick={() => onSegmentChange('residential')}
-            className={`px-5 py-2 rounded-full text-xs font-bold transition-all duration-300 flex items-center space-x-2 ${
+            className={`px-4 py-2 rounded-[6px] text-xs font-semibold tracking-tight transition-all duration-150 flex items-center space-x-2 ${
               currentSegment === 'residential'
-                ? 'bg-brand-500 text-canvas-950 shadow-md shadow-brand-500/20 scale-[1.02]'
+                ? 'bg-brand-500 text-canvas-950 font-bold shadow-[0_1px_2px_rgba(0,0,0,0.4)]'
                 : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
             }`}
           >
@@ -58,42 +59,64 @@ export const Header: React.FC<HeaderProps> = ({
 
           <button
             onClick={() => onSegmentChange('commercial')}
-            className={`px-5 py-2 rounded-full text-xs font-bold transition-all duration-300 flex items-center space-x-2 ${
+            className={`px-4 py-2 rounded-[6px] text-xs font-semibold tracking-tight transition-all duration-150 flex items-center space-x-2 ${
               currentSegment === 'commercial'
-                ? 'bg-brand-500 text-canvas-950 shadow-md shadow-brand-500/20 scale-[1.02]'
+                ? 'bg-brand-500 text-canvas-950 font-bold shadow-[0_1px_2px_rgba(0,0,0,0.4)]'
                 : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
             }`}
           >
             <Building2 className="w-3.5 h-3.5" />
-            <span>Commercial & Offices</span>
+            <span>Commercial</span>
           </button>
 
           <button
             onClick={() => onSegmentChange('plotted')}
-            className={`px-5 py-2 rounded-full text-xs font-bold transition-all duration-300 flex items-center space-x-2 ${
+            className={`px-4 py-2 rounded-[6px] text-xs font-semibold tracking-tight transition-all duration-150 flex items-center space-x-2 ${
               currentSegment === 'plotted'
-                ? 'bg-brand-500 text-canvas-950 shadow-md shadow-brand-500/20 scale-[1.02]'
+                ? 'bg-brand-500 text-canvas-950 font-bold shadow-[0_1px_2px_rgba(0,0,0,0.4)]'
                 : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
             }`}
           >
             <MapPin className="w-3.5 h-3.5" />
-            <span>Plotted Reserves</span>
+            <span>Plotted</span>
           </button>
         </nav>
 
         {/* Header Utility CTAs */}
-        <div className="flex items-center space-x-3 sm:space-x-4">
-          <div className="hidden lg:inline-flex items-center text-xs font-semibold text-brand-300 bg-brand-950/70 px-3.5 py-1.5 rounded-lg border border-brand-800/60 shadow-sm">
-            <ShieldCheck className="w-4 h-4 mr-1.5 text-brand-400" />
+        <div className="flex items-center space-x-2 sm:space-x-3">
+          
+          {/* Quick WhatsApp Advisor Link */}
+          <a
+            href={getWhatsAppUrl(null)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-xs font-bold text-[#25D366] bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 px-2.5 sm:px-3 py-2 rounded-[6px] transition-colors"
+            title="Chat with Advisor on WhatsApp"
+          >
+            <MessageCircle className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">WhatsApp</span>
+          </a>
+
+          {/* Quick Call */}
+          <a
+            href={getTelUrl()}
+            className="flex sm:hidden items-center justify-center p-2 text-slate-200 bg-white/[0.05] border border-white/[0.1] rounded-[6px]"
+            title="Call Advisor"
+          >
+            <Phone className="w-3.5 h-3.5 text-brand-400" />
+          </a>
+
+          <div className="hidden lg:inline-flex items-center text-[11px] font-mono font-medium text-brand-300 bg-brand-500/[0.07] px-3 py-1.5 rounded-[4px] border border-brand-500/25">
+            <ShieldCheck className="w-3.5 h-3.5 mr-1.5 text-brand-400" />
             <span>Kaveri 2.0 Audited</span>
           </div>
 
           <button
             onClick={onOpenVipModal}
-            className="relative group overflow-hidden bg-brand-500 hover:bg-brand-400 text-canvas-950 text-xs font-extrabold px-4 sm:px-5 py-2.5 rounded-lg transition-all shadow-md shadow-brand-500/20 flex items-center space-x-1.5"
+            className="btn-primary px-3 sm:px-4 py-2 sm:py-2.5 space-x-1.5 sm:space-x-2 text-xs sm:text-sm active:scale-[0.98]"
           >
-            <Calendar className="w-3.5 h-3.5 text-canvas-950" />
-            <span>Book VIP Site Tour</span>
+            <Calendar className="w-3.5 h-3.5 text-canvas-950 stroke-[2.2]" />
+            <span>Book Tour</span>
           </button>
         </div>
 
@@ -101,4 +124,3 @@ export const Header: React.FC<HeaderProps> = ({
     </header>
   );
 };
-

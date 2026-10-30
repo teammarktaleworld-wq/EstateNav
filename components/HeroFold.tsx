@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Search, Shield, ArrowDown, Sparkles, Building, Layers, MapPin, CheckCircle2 } from 'lucide-react';
+import { Search, Shield, ArrowDown, CheckCircle2 } from 'lucide-react';
 import { Segment } from '@/lib/types';
 
 interface HeroFoldProps {
@@ -23,27 +23,26 @@ export const HeroFold: React.FC<HeroFoldProps> = ({
   onSearchClick,
   onInspectSpotlight,
 }) => {
-  // Segment-specific copy and spotlight data
   const segmentConfig = {
     residential: {
-      badge: 'Q4 2026 Primary Launch Pad',
+      badge: 'Q4 2026 PRIMARY ALLOCATION PAD',
       headline: (
         <>
-          Navigate Bengaluru Real Estate with{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-emerald-200">
+          Bengaluru Real Estate with{' '}
+          <span className="text-white font-black underline decoration-brand-500 decoration-2 underline-offset-8">
             Data-Backed Certainty.
           </span>
         </>
       ),
       description:
-        'Institutional-grade research, Kaveri 2.0 title audits, and direct developer allocations across Sarjapur, Whitefield & North Bengaluru corridors.',
+        'Institutional research, Kaveri 2.0 title audits, and direct developer pricing across Sarjapur, Whitefield & North Bengaluru corridors.',
       spotlightBadge: 'Partner Flagship Feature',
       spotlightPartner: 'Abhee Ventures Anchor Partner',
       spotlightTitle: 'Abhee Codename New Dimension',
       spotlightLoc: '45-Acre Scotland-Themed Township • Varthur-Sarjapur Link',
       spotlightPrice: '₹1.35 Cr Onwards',
-      spotlightImg: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80',
-      features: ['3-Acre Golf Zone', '4 Grand Clubhouses', 'Mivan Formwork'],
+      spotlightImg: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=80',
+      features: ['3-Acre Golf Zone', '4 Signature Clubhouses', 'Mivan Formwork'],
       locationLabel: 'Micro-Market',
       locations: [
         'All Bengaluru Corridors',
@@ -61,11 +60,11 @@ export const HeroFold: React.FC<HeroFoldProps> = ({
       ],
     },
     commercial: {
-      badge: 'Institutional Tech Corridor Portfolio',
+      badge: 'INSTITUTIONAL TECH PARK PORTFOLIO',
       headline: (
         <>
           Enterprise Grade{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-emerald-200">
+          <span className="text-white font-black underline decoration-brand-500 decoration-2 underline-offset-8">
             Commercial & Office Leasing.
           </span>
         </>
@@ -77,7 +76,7 @@ export const HeroFold: React.FC<HeroFoldProps> = ({
       spotlightTitle: 'Prestige Tech Cloud – Tower B',
       spotlightLoc: 'Hebbal-Devanahalli Expressway • Warm Shell Handover',
       spotlightPrice: '₹85 / sq.ft / mo',
-      spotlightImg: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
+      spotlightImg: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=80',
       features: ['8.9% Institutional Cap Rate', 'Platinum Green Building', 'Redundant Power'],
       locationLabel: 'Tech Corridor',
       locations: [
@@ -95,11 +94,11 @@ export const HeroFold: React.FC<HeroFoldProps> = ({
       ],
     },
     plotted: {
-      badge: 'Infrastructure Corridors & Land Banks',
+      badge: 'INFRASTRUCTURE CORRIDORS & LAND RESERVES',
       headline: (
         <>
           Gated Plotted Reserves in{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-emerald-200">
+          <span className="text-white font-black underline decoration-brand-500 decoration-2 underline-offset-8">
             High-Growth Corridors.
           </span>
         </>
@@ -111,7 +110,7 @@ export const HeroFold: React.FC<HeroFoldProps> = ({
       spotlightTitle: 'Abhee Tranquila Plotted Enclave',
       spotlightLoc: 'Sarjapur-Attibele Corridor • Direct STRR Link',
       spotlightPrice: '₹90 Lakhs Onwards',
-      spotlightImg: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80',
+      spotlightImg: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1400&q=80',
       features: ['BMRDA Approved', 'Underground Utilities', 'Clubhouse & Parks'],
       locationLabel: 'Plotted Belt',
       locations: [
@@ -131,47 +130,42 @@ export const HeroFold: React.FC<HeroFoldProps> = ({
   }[segment];
 
   return (
-    <section className="relative bg-gradient-to-b from-canvas-950 via-canvas-900 to-canvas-950 border-b border-white/[0.08] py-8 sm:py-12 lg:py-16 overflow-hidden">
-      
-      {/* Background ambient radial gradients */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-10 right-10 w-80 h-80 bg-emerald-600/5 rounded-full blur-2xl pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+    <section className="relative bg-[#030712] border-b border-white/[0.08] py-6 sm:py-12 lg:py-16 overflow-hidden bg-tech-grid">
+      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
           
-          {/* Left Console (40-45% width on desktop) */}
+          {/* Left Console */}
           <div className="lg:col-span-5 space-y-4 sm:space-y-5">
             
-            {/* Live Launch Badge */}
-            <div className="inline-flex items-center space-x-2 bg-brand-500/10 border border-brand-500/30 px-3.5 py-1.5 rounded-full text-brand-300 text-xs font-semibold shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-brand-400 animate-pulse" />
+            {/* Technical Sub-Header Badge */}
+            <div className="inline-flex items-center space-x-2 text-[10px] sm:text-[11px] font-mono font-medium text-brand-300 bg-brand-500/[0.08] px-2.5 sm:px-3 py-1 rounded-[4px] border border-brand-500/25 tracking-wider">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-400" />
               <span>{segmentConfig.badge}</span>
             </div>
 
-            {/* Dynamic Headline */}
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-white">
+            {/* Display Headline */}
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.12] text-white">
               {segmentConfig.headline}
             </h1>
 
-            {/* Subtext description */}
-            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-xl">
+            {/* Subtext description (hidden on small mobile to immediately focus on search & properties) */}
+            <p className="hidden sm:block text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl font-normal">
               {segmentConfig.description}
             </p>
 
-            {/* Dynamic Search Console */}
-            <div className="bg-canvas-900/95 p-4 sm:p-5 rounded-2xl border border-white/[0.1] shadow-2xl space-y-3.5 backdrop-blur-xl">
+            {/* Architectural Search Console */}
+            <div className="bg-[#080d16] p-4 sm:p-6 rounded-[8px] border border-white/[0.1] shadow-2xl space-y-3 sm:space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 
                 {/* Micro-market selector */}
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+                  <label className="block text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider mb-1">
                     {segmentConfig.locationLabel}
                   </label>
                   <select
                     value={selectedMicroMarket}
                     onChange={(e) => onMicroMarketChange(e.target.value)}
-                    className="w-full bg-canvas-950 border border-slate-700/80 rounded-xl text-xs py-2.5 px-3 text-white focus:outline-none focus:border-brand-500 transition-colors"
+                    className="field-input py-2 px-3 text-xs font-medium"
                   >
                     {segmentConfig.locations.map((loc) => (
                       <option key={loc} value={loc} className="bg-slate-900 text-white">
@@ -183,13 +177,13 @@ export const HeroFold: React.FC<HeroFoldProps> = ({
 
                 {/* Budget selector */}
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+                  <label className="block text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider mb-1">
                     {segmentConfig.budgetLabel}
                   </label>
                   <select
                     value={selectedBudget}
                     onChange={(e) => onBudgetChange(e.target.value)}
-                    className="w-full bg-canvas-950 border border-slate-700/80 rounded-xl text-xs py-2.5 px-3 text-white focus:outline-none focus:border-brand-500 transition-colors"
+                    className="field-input py-2 px-3 text-xs font-medium"
                   >
                     {segmentConfig.budgets.map((b) => (
                       <option key={b} value={b} className="bg-slate-900 text-white">
@@ -201,87 +195,87 @@ export const HeroFold: React.FC<HeroFoldProps> = ({
 
               </div>
 
-              {/* Search Action Button */}
+              {/* Search CTA */}
               <button
                 onClick={onSearchClick}
-                className="w-full bg-brand-500 hover:bg-brand-400 text-canvas-950 font-bold text-xs sm:text-sm py-3 rounded-xl transition-all shadow-md shadow-brand-500/20 flex items-center justify-center space-x-2 active:scale-[0.99]"
+                className="btn-primary w-full py-3 space-x-2 text-xs sm:text-sm uppercase tracking-wider font-extrabold flex items-center justify-center"
               >
-                <Search className="w-4 h-4 text-canvas-950" />
-                <span>Search Active Verified Listings</span>
+                <Search className="w-4 h-4 text-canvas-950 stroke-[2.5]" />
+                <span>Search Verified Properties Below</span>
               </button>
             </div>
 
           </div>
 
-          {/* Right Spotlight Hero Card (55-60% width on desktop) */}
-          <div className="lg:col-span-7">
-            <div className="relative rounded-2xl overflow-hidden border border-white/[0.12] shadow-2xl group bg-canvas-900">
+          {/* Right Spotlight Hero Card - Desktop Only (Hidden on mobile to let users see the property listing immediately!) */}
+          <div className="hidden lg:block lg:col-span-7">
+            <div className="relative rounded-[8px] overflow-hidden border border-white/[0.12] shadow-2xl group bg-[#070b13]">
               
               {/* Image & Gradient Overlay */}
-              <div className="relative h-[300px] sm:h-[380px] w-full overflow-hidden">
+              <div className="relative h-[420px] w-full overflow-hidden">
                 <img
                   src={segmentConfig.spotlightImg}
                   alt={segmentConfig.spotlightTitle}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-canvas-950 via-canvas-950/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/50 to-transparent" />
               </div>
 
               {/* Badges on top */}
               <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-                <span className="bg-brand-500 text-canvas-950 text-[10px] font-extrabold px-3 py-1 rounded-md uppercase tracking-wider shadow">
+                <span className="bg-brand-500 text-canvas-950 text-[10px] font-mono font-extrabold px-3 py-1 rounded-[4px] uppercase tracking-wider shadow">
                   {segmentConfig.spotlightBadge}
                 </span>
-                <span className="bg-canvas-950/85 backdrop-blur-md text-brand-300 text-[10px] font-bold px-3 py-1 rounded-md border border-brand-500/30 flex items-center space-x-1">
+                <span className="bg-black/75 backdrop-blur-md text-slate-200 text-[10px] font-mono font-semibold px-2.5 py-1 rounded-[4px] border border-white/[0.12] flex items-center space-x-1">
                   <Shield className="w-3 h-3 text-brand-400" />
                   <span>K-RERA Registered</span>
                 </span>
               </div>
 
               {/* Bottom Card Content */}
-              <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 space-y-3">
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-2">
+              <div className="absolute bottom-6 left-7 right-7 space-y-3.5">
+                <div className="flex justify-between items-end gap-2.5">
                   <div>
-                    <span className="text-xs font-semibold text-brand-400 uppercase tracking-widest block">
+                    <span className="text-[11px] font-mono font-semibold text-brand-400 uppercase tracking-widest block">
                       {segmentConfig.spotlightPartner}
                     </span>
-                    <h2 className="text-lg sm:text-2xl font-extrabold text-white tracking-tight">
+                    <h2 className="text-2xl lg:text-3xl font-black text-white tracking-tight mt-0.5">
                       {segmentConfig.spotlightTitle}
                     </h2>
-                    <p className="text-xs text-slate-300 mt-0.5">
+                    <p className="text-sm text-slate-300 mt-1">
                       {segmentConfig.spotlightLoc}
                     </p>
                   </div>
-                  <div className="sm:text-right shrink-0">
+                  <div className="text-right shrink-0">
                     <span className="block text-[10px] text-slate-400 uppercase font-mono">Guide Pricing</span>
-                    <span className="text-lg sm:text-2xl font-extrabold text-brand-400">
+                    <span className="text-2xl font-black text-brand-400 font-mono">
                       {segmentConfig.spotlightPrice}
                     </span>
                   </div>
                 </div>
 
                 {/* Features & Action Footer */}
-                <div className="pt-3 border-t border-white/[0.1] flex flex-wrap items-center justify-between gap-3 text-xs text-slate-300">
-                  <div className="flex flex-wrap items-center gap-3">
+                <div className="pt-3.5 border-t border-white/[0.1] flex flex-wrap items-center justify-between gap-3 text-xs text-slate-300">
+                  <div className="flex flex-wrap items-center gap-4">
                     {segmentConfig.features.map((feat, i) => (
-                      <span key={i} className="inline-flex items-center text-[11px] text-slate-300">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-brand-400 mr-1 shrink-0" />
+                      <span key={i} className="inline-flex items-center text-xs text-slate-200 font-medium">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-brand-400 mr-1.5 shrink-0 stroke-[2.2]" />
                         {feat}
                       </span>
                     ))}
                   </div>
 
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2.5">
                     <a
                       href="#abhee-spotlight"
-                      className="text-xs text-slate-300 hover:text-white px-3 py-1.5 rounded-lg border border-white/[0.1] hover:border-white/[0.2] transition-colors flex items-center space-x-1"
+                      className="btn-secondary px-3.5 py-2 text-xs space-x-1.5"
                     >
                       <span>Track Record</span>
                       <ArrowDown className="w-3 h-3 text-slate-400" />
                     </a>
                     <button
                       onClick={onInspectSpotlight}
-                      className="bg-white hover:bg-brand-400 text-canvas-950 px-4 py-1.5 rounded-lg font-extrabold transition-all text-xs shadow"
+                      className="btn-primary px-4 py-2 text-xs font-bold"
                     >
                       Inspect Deck
                     </button>
@@ -298,4 +292,3 @@ export const HeroFold: React.FC<HeroFoldProps> = ({
     </section>
   );
 };
-

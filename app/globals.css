@@ -4,7 +4,7 @@
 
 :root {
   --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'Roboto Mono', monospace;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
 }
 
 body {
@@ -18,8 +18,8 @@ body {
 
 /* Custom refined scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -28,7 +28,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: #1e293b;
-  border-radius: 9999px;
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -43,32 +43,78 @@ body {
   scrollbar-width: none;
 }
 
-/* Glass & Card effects */
-.glass-panel {
-  background: rgba(11, 15, 25, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+/* Sharp Architectural Custom Styles */
+.btn-primary {
+  @apply relative inline-flex items-center justify-center font-semibold text-xs sm:text-sm text-canvas-950 bg-brand-500 hover:bg-brand-400 active:bg-brand-600 transition-all duration-150 rounded-[6px] shadow-[0_1px_2px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.25)] border border-brand-400/40;
 }
 
-.glass-panel-subtle {
-  background: rgba(15, 23, 42, 0.5);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+.btn-secondary {
+  @apply relative inline-flex items-center justify-center font-medium text-xs sm:text-sm text-slate-200 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] active:bg-white/[0.12] transition-all duration-150 rounded-[6px] border border-white/[0.1] hover:border-white/[0.2];
 }
 
-.glass-pill {
-  background: rgba(2, 6, 23, 0.7);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(51, 65, 85, 0.4);
+.btn-ghost {
+  @apply relative inline-flex items-center justify-center font-medium text-xs text-slate-300 hover:text-white transition-colors duration-150 rounded-[6px] hover:bg-white/[0.05];
 }
 
-/* Subtle grid texture overlay */
-.bg-grid-pattern {
-  background-size: 40px 40px;
+/* Crisp Input / Select styling */
+.field-input {
+  @apply w-full bg-[#070b13] border border-white/[0.1] hover:border-white/[0.16] focus:border-brand-500 rounded-[6px] text-xs text-white placeholder-slate-500 transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-brand-500/30;
+}
+
+/* Precision Range Slider */
+input[type=range] {
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 3px;
+  background: #10b981;
+  border: 2px solid #030712;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -6px;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+  transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+  background: #34d399;
+  transform: scale(1.1);
+}
+
+/* Architectural Card & Panel styling */
+.arch-card {
+  background: #080c15;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+}
+
+.arch-card-elevated {
+  background: #0a0f1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+/* Subtle Technical Grid Overlay */
+.bg-tech-grid {
+  background-size: 48px 48px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
 }
-
