@@ -23,25 +23,25 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Brand Mark with Official Logo */}
         <div 
           onClick={() => onSegmentChange('residential')}
-          className="flex items-center space-x-3 cursor-pointer group select-none"
+          className="flex items-center space-x-3.5 cursor-pointer group select-none"
         >
-          <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-[6px] bg-[#070b13] border border-white/[0.12] p-1 flex items-center justify-center shrink-0 group-hover:border-brand-500/40 transition-all shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
+          <div className="relative w-11 h-11 sm:w-13 sm:h-13 rounded-[8px] bg-[#070b13] border border-white/[0.14] p-1.5 flex items-center justify-center shrink-0 group-hover:border-brand-500/50 transition-all shadow-md">
             <img
               src="/logo.png"
               alt="EstateNav Official Logo"
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain transform group-hover:scale-105 transition-transform"
             />
           </div>
           <div>
             <div className="flex items-center space-x-2">
-              <span className="text-lg sm:text-2xl font-black tracking-tight text-white">
+              <span className="font-logo font-black tracking-tight text-xl sm:text-2xl text-white">
                 Estate<span className="text-brand-400">Nav</span>
               </span>
               <span className="hidden sm:inline-block text-[10px] px-1.5 py-0.2 rounded font-mono font-semibold bg-white/[0.06] text-slate-300 border border-white/[0.1]">
                 ADVISORY
               </span>
             </div>
-            <span className="block text-[9px] sm:text-[10px] uppercase tracking-wider text-slate-400 font-medium">
+            <span className="block text-[9px] sm:text-[10px] uppercase tracking-widest text-slate-400 font-mono">
               Bengaluru Direct Developer Engine
             </span>
           </div>

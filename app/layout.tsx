@@ -1,5 +1,13 @@
 import type { Metadata, Viewport } from 'next';
+import { Montserrat } from 'next/font/google';
 import './globals.css';
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['600', '700', '800', '900'],
+  variable: '--font-logo',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'EstateNav — Bengaluru Real Estate Advisory Engine | Kaveri 2.0 Audited',
@@ -78,8 +86,26 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className={`dark scroll-smooth ${montserrat.variable}`}>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof window !== 'undefined') {
+                const _log = console.log;
+                const _info = console.info;
+                console.log = function(...args) {
+                  if (typeof args[0] === 'string' && args[0].includes('[Fast Refresh]')) return;
+                  _log.apply(console, args);
+                };
+                console.info = function(...args) {
+                  if (typeof args[0] === 'string' && args[0].includes('[Fast Refresh]')) return;
+                  _info.apply(console, args);
+                };
+              }
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

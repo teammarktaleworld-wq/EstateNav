@@ -31,6 +31,7 @@ const config: Config = {
         },
       },
       fontFamily: {
+        logo: ['var(--font-logo)', 'Montserrat', 'system-ui', 'sans-serif'],
         sans: ['var(--font-inter)', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['var(--font-mono)', 'monospace'],
       },

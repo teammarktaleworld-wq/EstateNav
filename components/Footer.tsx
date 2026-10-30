@@ -1,84 +1,84 @@
 'use client';
 
 import React from 'react';
-import { Compass, ShieldCheck, ExternalLink } from 'lucide-react';
+import { ShieldCheck, ExternalLink, Building2, MapPin, Scale } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#040810] text-slate-400 text-xs border-t border-white/[0.08] pt-12 pb-24 md:pb-12">
-      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 space-y-10">
+    <footer className="bg-[#040810] text-slate-400 text-xs border-t border-white/[0.08] pt-8 sm:pt-12 pb-24 md:pb-12">
+      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 space-y-6 sm:space-y-8">
 
-        {/* Top: Brand + nav columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-8 border-b border-white/[0.08]">
-
-          {/* Brand */}
-          <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-[6px] bg-[#070b13] border border-white/[0.12] p-1 flex items-center justify-center shrink-0 shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
-                <img
-                  src="/logo.png"
-                  alt="EstateNav Official Logo"
-                  className="w-full h-full object-contain"
-                />
+        {/* 1. Header Brand Row with Enlarged Logo & Matching Logo Font */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-white/[0.08]">
+          <div className="flex items-center gap-3.5">
+            <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-[8px] bg-[#070b13] border border-white/[0.14] p-1.5 flex items-center justify-center shrink-0 shadow-md">
+              <img
+                src="/logo.png"
+                alt="EstateNav Official Logo"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div>
+              <div className="flex items-center space-x-2">
+                <span className="font-logo font-black tracking-tight text-xl sm:text-2xl text-white">
+                  Estate<span className="text-brand-400">Nav</span>
+                </span>
+                <span className="text-[10px] px-1.5 py-0.2 rounded font-mono font-semibold bg-white/[0.06] text-slate-300 border border-white/[0.1]">
+                  ADVISORY
+                </span>
               </div>
-              <span className="text-xl font-black tracking-tight text-white">
-                Estate<span className="text-brand-400">Nav</span>
+              <span className="block text-[9px] sm:text-[10px] uppercase tracking-widest text-slate-400 font-mono mt-0.5">
+                Bengaluru Direct Developer Engine
               </span>
             </div>
+          </div>
 
-            <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
-              Institutional-grade real estate advisory and direct developer allocations across Bengaluru.
-              Data-backed research, transit-matched discovery, and digitized Kaveri 2.0 title clearances.
-            </p>
+          <div className="flex items-center gap-2 text-brand-400 text-xs font-semibold bg-brand-500/[0.07] px-3 py-1.5 rounded-[4px] border border-brand-500/20">
+            <ShieldCheck className="w-4 h-4 shrink-0" />
+            <span>Zero-Brokerage Mandate · Authorized Channel Partner</span>
+          </div>
+        </div>
 
-            <div className="flex items-center gap-2 text-brand-400 text-xs font-semibold">
-              <ShieldCheck className="w-4 h-4" />
-              <span>Zero-Brokerage Mandate</span>
+        {/* 2. Compact 2 x 2 Format on Mobile / 4 Columns on Desktop */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pb-6 border-b border-white/[0.08] text-xs">
+
+          {/* Quadrant 1: Corridors */}
+          <div className="space-y-2">
+            <div className="flex items-center gap-1.5 text-white font-mono font-bold text-[11px] uppercase tracking-wider">
+              <MapPin className="w-3.5 h-3.5 text-brand-400" />
+              <h4>Corridors</h4>
             </div>
-          </div>
-
-          {/* Column: Corridors */}
-          <div className="space-y-3">
-            <h4 className="font-black text-white text-[11px] uppercase tracking-wider">
-              Bengaluru Corridors
-            </h4>
-            <ul className="space-y-2 text-slate-400 text-xs">
-              {[
-                'Sarjapur - Varthur Link',
-                'Whitefield & EPIP Zone',
-                'Outer Ring Road (ORR)',
-                'Hebbal & North BLR',
-                'Electronic City Phase 1',
-              ].map((item) => (
-                <li key={item} className="hover:text-white transition-colors cursor-pointer">{item}</li>
-              ))}
+            <ul className="space-y-1.5 text-slate-400 text-[11px]">
+              <li className="hover:text-white transition-colors cursor-pointer">Sarjapur - Varthur Link</li>
+              <li className="hover:text-white transition-colors cursor-pointer">Whitefield &amp; EPIP Zone</li>
+              <li className="hover:text-white transition-colors cursor-pointer">Outer Ring Road (ORR)</li>
+              <li className="hover:text-white transition-colors cursor-pointer">Hebbal &amp; North BLR</li>
+              <li className="hover:text-white transition-colors cursor-pointer">Electronic City Phase 1</li>
             </ul>
           </div>
 
-          {/* Column: Featured inventory */}
-          <div className="space-y-3">
-            <h4 className="font-black text-white text-[11px] uppercase tracking-wider">
-              Featured Inventory
-            </h4>
-            <ul className="space-y-2 text-slate-400 text-xs">
-              {[
-                'Abhee Codename New Dimension',
-                'Abhee Celestial City',
-                'Abhee Aaria (Gunjur)',
-                'Abhee Silicon Shine (Phase 2)',
-                'Abhee Tranquila Plots',
-              ].map((item) => (
-                <li key={item} className="hover:text-white transition-colors cursor-pointer">{item}</li>
-              ))}
+          {/* Quadrant 2: Featured Inventory */}
+          <div className="space-y-2">
+            <div className="flex items-center gap-1.5 text-white font-mono font-bold text-[11px] uppercase tracking-wider">
+              <Building2 className="w-3.5 h-3.5 text-brand-400" />
+              <h4>Featured Inventory</h4>
+            </div>
+            <ul className="space-y-1.5 text-slate-400 text-[11px]">
+              <li className="hover:text-white transition-colors cursor-pointer">Codename New Dimension</li>
+              <li className="hover:text-white transition-colors cursor-pointer">Abhee Celestial City</li>
+              <li className="hover:text-white transition-colors cursor-pointer">Abhee Aaria (Gunjur)</li>
+              <li className="hover:text-white transition-colors cursor-pointer">Abhee Silicon Shine (Ph 2)</li>
+              <li className="hover:text-white transition-colors cursor-pointer">Abhee Tranquila Plots</li>
             </ul>
           </div>
 
-          {/* Column: Statutory */}
-          <div className="space-y-3">
-            <h4 className="font-black text-white text-[11px] uppercase tracking-wider">
-              Statutory Resources
-            </h4>
-            <ul className="space-y-2 text-slate-400 text-xs">
+          {/* Quadrant 3: Statutory Resources */}
+          <div className="space-y-2">
+            <div className="flex items-center gap-1.5 text-white font-mono font-bold text-[11px] uppercase tracking-wider">
+              <Scale className="w-3.5 h-3.5 text-brand-400" />
+              <h4>Statutory Tools</h4>
+            </div>
+            <ul className="space-y-1.5 text-slate-400 text-[11px]">
               <li>
                 <a
                   href="https://rera.karnataka.gov.in/"
@@ -86,63 +86,73 @@ export const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors flex items-center gap-1"
                 >
-                  Karnataka RERA Portal
-                  <ExternalLink className="w-3 h-3 text-slate-500" />
+                  <span>Karnataka RERA</span>
+                  <ExternalLink className="w-2.5 h-2.5 text-slate-500" />
                 </a>
               </li>
-              {[
-                'Kaveri 2.0 Sub-Registrar Rates',
-                'Stamp Duty & Reg. Calculators',
-                'BBMP A-Khata Title Verification',
-              ].map((item) => (
-                <li key={item} className="hover:text-white transition-colors cursor-pointer">{item}</li>
-              ))}
+              <li className="hover:text-white transition-colors cursor-pointer">Kaveri 2.0 Sub-Registrar</li>
+              <li className="hover:text-white transition-colors cursor-pointer">Stamp Duty Calculator</li>
+              <li className="hover:text-white transition-colors cursor-pointer">BBMP A-Khata Title Verification</li>
+            </ul>
+          </div>
+
+          {/* Quadrant 4: Advisory Standards */}
+          <div className="space-y-2">
+            <div className="flex items-center gap-1.5 text-white font-mono font-bold text-[11px] uppercase tracking-wider">
+              <ShieldCheck className="w-3.5 h-3.5 text-brand-400" />
+              <h4>Advisory Mandate</h4>
+            </div>
+            <ul className="space-y-1.5 text-slate-400 text-[11px]">
+              <li>100% Encumbered Title Audits</li>
+              <li>Pre-Approved Bank APF Lines</li>
+              <li>Direct Developer Pricing Sheet</li>
+              <li>Zero Buyer Brokerage</li>
             </ul>
           </div>
 
         </div>
 
-        {/* RERA Compliance Box — IMMUTABLE */}
-        <div className="bg-[#060b13] border border-white/[0.08] rounded-[6px] p-5 sm:p-6 space-y-4">
-          <div className="flex items-center gap-2 text-brand-400 font-mono font-bold text-[11px] uppercase tracking-wider">
-            <ShieldCheck className="w-4 h-4" />
-            Karnataka RERA Regulatory Registration &amp; Compliance Dossier
+        {/* 3. Compact RERA Compliance Box (Tightly formatted, no dead gap) */}
+        <div className="bg-[#060b13] border border-white/[0.08] rounded-[6px] p-4 sm:p-5 space-y-3">
+          <div className="flex items-center gap-2 text-brand-400 font-mono font-bold text-[10px] sm:text-[11px] uppercase tracking-wider">
+            <ShieldCheck className="w-3.5 h-3.5" />
+            <span>Karnataka RERA Regulatory Registration &amp; Compliance Dossier</span>
           </div>
 
-          {/* RERA stat cells */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
-            {[
-              { label: 'RERA Registered Agent',  value: 'SV PRAVEEN',                              accent: false },
-              { label: 'K-RERA Registration No.',value: 'PRM/KA/RERA/1251/310/AG/260916/007810',   accent: true  },
-              { label: 'RERA Validity Period',   value: '16-09-2026 to 16-09-2031',                accent: false },
-            ].map(({ label, value, accent }) => (
-              <div key={label} className="bg-[#040810] rounded-[4px] border border-white/[0.06] p-3">
-                <span className="block text-[10px] text-slate-500 uppercase tracking-wide">{label}</span>
-                <span
-                  className={`font-bold text-xs mt-0.5 block truncate ${accent ? 'text-brand-300' : 'text-white'}`}
-                  title={value}
-                >
-                  {value}
-                </span>
-              </div>
-            ))}
+          {/* RERA Stat Cells (2 cols on mobile, 3 cols on desktop) */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs font-mono">
+            <div className="bg-[#040810] rounded-[4px] border border-white/[0.06] p-2.5">
+              <span className="block text-[9px] text-slate-500 uppercase tracking-wide">Registered Agent</span>
+              <span className="font-bold text-white text-xs mt-0.5 block truncate">SV PRAVEEN</span>
+            </div>
+
+            <div className="bg-[#040810] rounded-[4px] border border-white/[0.06] p-2.5">
+              <span className="block text-[9px] text-slate-500 uppercase tracking-wide">RERA Validity</span>
+              <span className="font-bold text-white text-xs mt-0.5 block truncate">16-09-2026 to 2031</span>
+            </div>
+
+            <div className="col-span-2 sm:col-span-1 bg-[#040810] rounded-[4px] border border-white/[0.06] p-2.5">
+              <span className="block text-[9px] text-slate-500 uppercase tracking-wide">K-RERA Registration No.</span>
+              <span className="font-bold text-brand-300 text-xs mt-0.5 block truncate" title="PRM/KA/RERA/1251/310/AG/260916/007810">
+                PRM/KA/RERA/1251/310/AG/260916/007810
+              </span>
+            </div>
           </div>
 
-          {/* Mandatory legal disclosure — verbatim */}
-          <p className="text-[11px] text-slate-400 leading-relaxed">
-            <strong className="text-slate-300">Legal Disclosure Statement: </strong>
+          {/* Mandatory legal disclosure */}
+          <p className="text-[10px] sm:text-[11px] text-slate-400 leading-relaxed pt-1">
+            <strong className="text-slate-300">Legal Disclosure: </strong>
             EstateNav is an independent advisory portal and authorized channel partner platform operated by
             SV Praveen (RERA No. PRM/KA/RERA/1251/310/AG/260916/007810), not the official developer website.
-            All project brand names, logos, layouts, and renderings belong to their respective developers
-            (including Abhee Ventures Private Limited) and are displayed strictly for information and
-            institutional advisory matching under direct developer terms.
+            All project brand names, layouts, and renderings belong to their respective developers
+            (including Abhee Ventures Private Limited) and are displayed strictly for institutional advisory under direct developer terms.
           </p>
         </div>
 
-        {/* Copyright */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-3 text-[11px] text-slate-500">
+        {/* 4. Copyright Row */}
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-[10px] sm:text-[11px] text-slate-500 pt-1">
           <p>© 2026 EstateNav Real Estate Advisory. All rights reserved.</p>
-          <p>Designed with precision for Bengaluru&apos;s urban technology leaders.</p>
+          <p className="font-mono text-[10px]">Precision Urban Technology Advisory</p>
         </div>
 
       </div>
