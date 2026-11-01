@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { Shield, Clock, ExternalLink, FileSpreadsheet, MapPin, MessageCircle, Phone, Mail, UserCheck } from 'lucide-react';
+import { Shield, Clock, ExternalLink, FileSpreadsheet, MapPin } from 'lucide-react';
 import { Property } from '@/lib/types';
-import { ADVISOR_NAME, ADVISOR_PHONE_DISPLAY, getWhatsAppUrl, getEmailUrl, getTelUrl } from '@/lib/contact';
+import { ADVISOR_NAME } from '@/lib/contact';
 
 interface PropertyCardProps {
   property: Property;
@@ -14,10 +14,6 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
   property,
   onInspect,
 }) => {
-  const whatsappLink = getWhatsAppUrl(property);
-  const emailLink = getEmailUrl(property);
-  const telLink = getTelUrl();
-
   return (
     <article className="group bg-[#080d16] rounded-[8px] overflow-hidden border border-white/[0.08] hover:border-brand-500/30 transition-colors duration-200 flex flex-col justify-between shadow-lg">
 
@@ -126,9 +122,8 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
       {/* Card Action Footer with Direct Contact Options */}
       <div className="px-4 sm:px-5 pb-4 sm:pb-5 pt-0 space-y-2.5">
         
-        {/* Direct Contact Action Bar (WhatsApp, Call, Email) */}
+        {/* Direct contact buttons are available through the allocation deck form.
         <div className="grid grid-cols-3 gap-1.5">
-          {/* WhatsApp Direct */}
           <a
             href={whatsappLink}
             target="_blank"
@@ -140,7 +135,6 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             <span>WhatsApp</span>
           </a>
 
-          {/* Direct Call */}
           <a
             href={telLink}
             className="flex items-center justify-center gap-1.5 bg-white/[0.04] hover:bg-white/[0.08] text-slate-200 border border-white/[0.1] py-2 px-2 rounded-[6px] text-xs font-semibold transition-colors active:scale-[0.98]"
@@ -150,7 +144,6 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             <span>Call</span>
           </a>
 
-          {/* Direct Email */}
           <a
             href={emailLink}
             className="flex items-center justify-center gap-1.5 bg-white/[0.04] hover:bg-white/[0.08] text-slate-200 border border-white/[0.1] py-2 px-2 rounded-[6px] text-xs font-semibold transition-colors active:scale-[0.98]"
@@ -160,6 +153,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             <span>Email</span>
           </a>
         </div>
+        */}
 
         {/* Primary Allocation Deck CTA */}
         <button
